@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8fnm0w33wi0b"
-path="res://.godot/imported/tiles.webp-e2a674472c769626780952ccff122b85.ctex"
+uid="uid://v14buj2w3kbv"
+path="res://.godot/imported/pixil-frame-0.png-19da160fa0fbd2dfeac1088755f4f03e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/terrain/tiles.webp"
-dest_files=["res://.godot/imported/tiles.webp-e2a674472c769626780952ccff122b85.ctex"]
+source_file="res://assets/mushroom/pixil-frame-0.png"
+dest_files=["res://.godot/imported/pixil-frame-0.png-19da160fa0fbd2dfeac1088755f4f03e.ctex"]
 
 [params]
 

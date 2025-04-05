@@ -1,17 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=5 format=3 uid="uid://c46cu51mploew"]
 
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
 [ext_resource type="PackedScene" uid="uid://36sugoftp1op" path="res://assets/unit/unit.tscn" id="2_l57e8"]
 [ext_resource type="Script" uid="uid://5vvmgp8bve11" path="res://assets/camera/camera_2d.gd" id="3_88ng3"]
+[ext_resource type="PackedScene" uid="uid://otoht3lqk2dl" path="res://assets/mushroom/mushroom.tscn" id="4_t3mbi"]
 
 [node name="World" type="Node2D"]
 
 [node name="Terrain" parent="." instance=ExtResource("1_c5pkw")]
 
 [node name="Unit" parent="." instance=ExtResource("2_l57e8")]
-position = Vector2(61, -33)
+position = Vector2(-334, -32)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(240, -55)
+position = Vector2(88, 6)
 zoom = Vector2(2, 2)
 script = ExtResource("3_88ng3")
+
+[node name="Unit2" parent="." instance=ExtResource("2_l57e8")]
+position = Vector2(473, -32)
+direction = -1
+
+[node name="Mushroom" parent="." instance=ExtResource("4_t3mbi")]
+position = Vector2(-427, -64)

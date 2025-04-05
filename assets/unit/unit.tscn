@@ -1,24 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://36sugoftp1op"]
+[gd_scene load_steps=9 format=3 uid="uid://36sugoftp1op"]
 
 [ext_resource type="Texture2D" uid="uid://c2tvq88565gbh" path="res://assets/unit/robot.webp" id="1_edrtj"]
-[ext_resource type="Script" uid="uid://bdtlnplolg227" path="res://assets/unit/controller.gd" id="1_rdg2v"]
-
-[sub_resource type="Animation" id="Animation_qqeta"]
-resource_name = "new_animation"
-length = 4.0
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
+[ext_resource type="Script" uid="uid://bdtlnplolg227" path="res://assets/unit/unit.gd" id="1_rdg2v"]
 
 [sub_resource type="Animation" id="Animation_ns5wx"]
 length = 0.001
@@ -35,21 +18,73 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfka7"]
-_data = {
-&"RESET": SubResource("Animation_ns5wx"),
-&"new_animation": SubResource("Animation_qqeta")
+[sub_resource type="Animation" id="Animation_rdg2v"]
+resource_name = "Attacking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [12, 13]
 }
 
-[node name="Unit" type="Node2D"]
+[sub_resource type="Animation" id="Animation_qqeta"]
+resource_name = "Moving"
+length = 4.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfka7"]
+_data = {
+&"Attacking": SubResource("Animation_rdg2v"),
+&"Moving": SubResource("Animation_qqeta"),
+&"RESET": SubResource("Animation_ns5wx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdg2v"]
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqeta"]
+size = Vector2(48.5, 56.25)
+
+[node name="Unit" type="CharacterBody2D"]
 script = ExtResource("1_rdg2v")
+max_hp = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_edrtj")
 hframes = 8
 vframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_mfka7")
 }
+
+[node name="VisionArea" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("RectangleShape2D_rdg2v")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qqeta")
+
+[connection signal="body_entered" from="VisionArea" to="." method="_on_body_entered"]
