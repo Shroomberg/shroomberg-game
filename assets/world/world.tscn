@@ -1,7 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=3 format=3 uid="uid://c46cu51mploew"]
 
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
+[ext_resource type="PackedScene" uid="uid://36sugoftp1op" path="res://assets/unit/unit.tscn" id="2_l57e8"]
 
 [node name="World" type="Node2D"]
 
 [node name="Terrain" parent="." instance=ExtResource("1_c5pkw")]
+
+[node name="Unit" parent="." instance=ExtResource("2_l57e8")]
+position = Vector2(61, -33)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(240, -55)
+zoom = Vector2(2, 2)

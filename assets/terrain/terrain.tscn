@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://5qbkx36w3pw6"]
+[gd_scene load_steps=2 format=4 uid="uid://5qbkx36w3pw6"]
+
+[ext_resource type="TileSet" uid="uid://ddp5m0qfrvdjg" path="res://assets/terrain/default.tres" id="1_dtlri"]
 
 [node name="Terrain" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAMAAAABAAAAAAADAAMAAAACAAAAAAAEAAMAAAADAAAAAAADAAMAAAAEAAAAAAADAAMAAAACAP//AAAEAAIAAAACAP7/AAAEAAAAAAAFAAAAAAAEAAMAAAAFAP//AAAEAAIAAAAFAP7/AAAEAAEAAAAFAP3/AAAEAAAAAAAGAAAAAAADAAMAAAAHAAAAAAADAAMAAAAIAAAAAAADAAMAAAD//wAAAAACAAMAAAD/////AAACAAIAAAAJAP//AAACAAIAAQAJAAAAAAAFAAEAAAA=")
+tile_set = ExtResource("1_dtlri")
