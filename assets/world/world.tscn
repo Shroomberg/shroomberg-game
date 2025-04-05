@@ -11,7 +11,8 @@
 
 [node name="Unit" parent="." instance=ExtResource("2_l57e8")]
 position = Vector2(-334, -32)
-max_hp = 100.0
+max_hp = 20.0
+damage = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(88, 6)
@@ -20,7 +21,7 @@ script = ExtResource("3_88ng3")
 
 [node name="Unit2" parent="." instance=ExtResource("2_l57e8")]
 position = Vector2(473, -32)
-max_hp = 100.0
+damage = 2.0
 direction = -1
 
 [node name="Mushroom" parent="." instance=ExtResource("4_t3mbi")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://36sugoftp1op"]
+[gd_scene load_steps=12 format=3 uid="uid://36sugoftp1op"]
 
 [ext_resource type="Texture2D" uid="uid://c2tvq88565gbh" path="res://assets/unit/robot.webp" id="1_edrtj"]
 [ext_resource type="Script" uid="uid://bdtlnplolg227" path="res://assets/unit/unit.gd" id="1_rdg2v"]
@@ -17,21 +17,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="Animation" id="Animation_rdg2v"]
-resource_name = "Attacking"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.6),
-"transitions": PackedFloat32Array(1, 1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [12, 13]
+"values": [Vector2i(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qqeta"]
@@ -52,10 +48,75 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_mfka7"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+
+[sub_resource type="Animation" id="Animation_jn00f"]
+resource_name = "Dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [44]
+}
+
+[sub_resource type="Animation" id="Animation_rdg2v"]
+resource_name = "PreparingAction"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_pfcbc"]
+resource_name = "ExecutingAction"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mfka7"]
 _data = {
-&"Attacking": SubResource("Animation_rdg2v"),
+&"Dead": SubResource("Animation_jn00f"),
+&"ExecutingAction": SubResource("Animation_pfcbc"),
+&"Idle": SubResource("Animation_mfka7"),
 &"Moving": SubResource("Animation_qqeta"),
+&"PreparingAction": SubResource("Animation_rdg2v"),
 &"RESET": SubResource("Animation_ns5wx")
 }
 
@@ -95,4 +156,8 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
+[node name="CooldownTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
 [connection signal="body_entered" from="VisionArea" to="." method="_on_body_entered"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
