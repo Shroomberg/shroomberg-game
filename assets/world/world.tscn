@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=6 format=3 uid="uid://c46cu51mploew"]
 
+[ext_resource type="Script" uid="uid://yblxsvk27yqc" path="res://assets/world/world.gd" id="1_aekxa"]
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
-[ext_resource type="PackedScene" uid="uid://otoht3lqk2dl" path="res://assets/mushroom/mushroom.tscn" id="2_l57e8"]
+[ext_resource type="PackedScene" uid="uid://36sugoftp1op" path="res://assets/mushroom/mushroom.tscn" id="2_l57e8"]
 [ext_resource type="Script" uid="uid://5vvmgp8bve11" path="res://assets/camera/camera_2d.gd" id="3_88ng3"]
 [ext_resource type="PackedScene" uid="uid://6eoxs08sqbay" path="res://assets/roots/roots.tscn" id="4_t3mbi"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_aekxa")
 
 [node name="Terrain" parent="." instance=ExtResource("1_c5pkw")]
 
