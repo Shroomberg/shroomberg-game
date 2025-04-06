@@ -3,6 +3,10 @@ extends Camera2D
 # Movement speed in pixels per second
 var speed := 400
 
+# Panning
+var dragging := false
+var last_mouse_position := Vector2.ZERO
+
 func _process(delta):
 	var velocity := Vector2.ZERO
 
@@ -21,3 +25,24 @@ func _process(delta):
 
 	# Move the camera
 	position += velocity * delta
+	
+
+var zoom_step := 0.1
+var min_zoom := 0.5
+var max_zoom := 3.0
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			zoom = clamp(zoom - Vector2(zoom_step, zoom_step), Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			zoom = clamp(zoom + Vector2(zoom_step, zoom_step), Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			dragging = true
+			last_mouse_position = get_viewport().get_mouse_position()
+		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			dragging = false
+
+	elif event is InputEventMouseMotion and dragging:
+		var delta = event.relative
+		position -= delta / zoom # Zoom-scaled dragging
