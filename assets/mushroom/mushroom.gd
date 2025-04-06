@@ -12,31 +12,45 @@ enum UnitState {
 enum Player { Left, Right }
 
 @export var player: Player = Player.Left
-@export var max_size: float = 8
+@export var max_size: float = 4
 @export var grown_size: float = 2
 @export var speed: float = 100.0
 @export var damage: float = 1.0
-@export var action_range: float = 10
+@export var action_range: float = 3
 @export var borrow_duration: float = 1
 @export var attack_duration: float = 1
 @export var attack_cooldown: float = 1
 
 const BULLET_SCENE = preload("res://assets/bullet/bullet.tscn")
 
-var state: UnitState
-var size: float
+@export var state: UnitState
+@export var size: float
 var power_factor: float 
 var target: Mushroom
+var borrow_requested: bool
+var borrow_position: float
 var direction: float
+var world: World
+var roots: Roots
 
 func _ready():
+	borrow_requested = false
+	world = get_parent() as World
+	roots = world.find_child("Roots")
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)
 	if player == Player.Right:
 		direction = -1
 	else:		
 		direction = 1
-	set_size(1)
-	set_state(UnitState.Growing)	
+		
+	if size == 0:
+		set_size(1)
+		set_state(UnitState.Growing)	
+	else:		
+		var init_state = state
+		state = 0
+		set_size(size)
+		set_state(init_state)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is not InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT or !event.pressed:
@@ -44,8 +58,10 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	match state:
 		UnitState.Borrowed:	
 			unborrow()		
-		UnitState.Moving:	
-			borrow()				
+		UnitState.Moving:
+			borrow_position = roots.get_closest_tile(position.x, direction)
+			borrow_requested = true
+			msg("borrow_position: "+str(borrow_position))
 
 func _on_state_timer_timeout():
 	msg("timer")
@@ -53,6 +69,7 @@ func _on_state_timer_timeout():
 		UnitState.Unborrowing:
 			set_state(UnitState.Moving)
 		UnitState.Borrowing:
+			roots.spawn_root(borrow_position)
 			set_state(UnitState.Borrowed)
 		UnitState.Attacking, UnitState.BorrowedAttacking:
 			do_target_attack()
@@ -93,10 +110,12 @@ func set_state(new_state: UnitState):
 	decide_new_action()
 
 func borrow():
+	borrow_requested = false
 	$StateTimer.start(borrow_duration)
 	set_state(UnitState.Borrowing)	
 	
 func unborrow():
+	borrow_requested = false
 	$StateTimer.start(borrow_duration)
 	set_state(UnitState.Unborrowing)	
 	
@@ -129,7 +148,11 @@ func do_target_attack():
 	#target.recieve_damage(damage)	
 
 func move(delta: float):	
+	var old_position = position.x
 	position.x += direction * speed * delta
+	if borrow_requested and borrow_position >= min(old_position, position.x) and borrow_position <= max(old_position, position.x):
+		position.x = borrow_position
+		borrow()
 	
 func grow():
 	set_state(UnitState.Borrowed)

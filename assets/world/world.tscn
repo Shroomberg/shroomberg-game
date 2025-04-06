@@ -16,10 +16,10 @@ script = ExtResource("3_88ng3")
 
 [node name="Mushroom" parent="." instance=ExtResource("2_l57e8")]
 position = Vector2(-1016, 0)
-
-[node name="Mushroom2" parent="." instance=ExtResource("2_l57e8")]
-position = Vector2(889, 0)
-player = 1
+max_size = 3.0
+grown_size = 1.0
+state = 7
+size = 3.0
 
 [node name="Roots" parent="." instance=ExtResource("4_t3mbi")]
-position = Vector2(-1514, 187)
+z_index = 1

@@ -8,6 +8,7 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c8kr5"]
 texture = ExtResource("1_jettl")
 texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cgrx8"]
 texture = ExtResource("2_kmod4")
@@ -22,6 +23,7 @@ texture = ExtResource("4_i8oak")
 texture_region_size = Vector2i(128, 128)
 
 [resource]
+tile_size = Vector2i(192, 192)
 sources/0 = SubResource("TileSetAtlasSource_c8kr5")
 sources/1 = SubResource("TileSetAtlasSource_cgrx8")
 sources/2 = SubResource("TileSetAtlasSource_ne4ka")
