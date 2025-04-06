@@ -6,19 +6,22 @@ enum UnitState {
 	Borrowing, Borrowed, Unborrowing, 
 	BorrowedAttacking, BorrowedAttackCooldown, 	
 	Moving, Attacking, AttackCooldown,
-	Dead}
+	Dead
+}
 	
 enum Player { Left, Right }
 
-@export var max_size: float = 8
-@export var grown_size: float = 4
 @export var player: Player = Player.Left
+@export var max_size: float = 8
+@export var grown_size: float = 2
 @export var speed: float = 100.0
 @export var damage: float = 1.0
 @export var action_range: float = 10
-@export var borrow_duration: float = 2
+@export var borrow_duration: float = 1
 @export var attack_duration: float = 1
-@export var attack_cooldown: float = 2
+@export var attack_cooldown: float = 1
+
+const BULLET_SCENE = preload("res://assets/bullet/bullet.tscn")
 
 var state: UnitState
 var size: float
@@ -29,7 +32,6 @@ var direction: float
 func _ready():
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)
 	if player == Player.Right:
-		$Sprite.scale.x = -1
 		direction = -1
 	else:		
 		direction = 1
@@ -74,12 +76,12 @@ func _on_vision_area_body_entered(body: Node2D) -> void:
 	if body != self:		
 		decide_new_action()
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float):
 	match state:
 		UnitState.Moving:
 			move(delta)			
 		UnitState.Growing, UnitState.Borrowed:
-			receive_heal(delta*1)
+			receive_heal(delta*0.3)
 
 func set_state(new_state: UnitState):	
 	if new_state == state:
@@ -117,8 +119,14 @@ func cooldown_target_attack():
 			set_state(UnitState.BorrowedAttackCooldown)	
 
 func do_target_attack():
-	if target:
-		target.recieve_damage(damage)	
+	if !target:
+		return
+	var bullet = BULLET_SCENE.instantiate()
+	bullet.position = $BulletSpawnPoint.global_position
+	bullet.target = target
+	bullet.damage = damage
+	get_parent().add_child(bullet)
+	#target.recieve_damage(damage)	
 
 func move(delta: float):	
 	position.x += direction * speed * delta
@@ -129,7 +137,7 @@ func grow():
 func set_size(new_size: float):
 	size = new_size
 	power_factor = sqrt(size / max_size)
-	scale = Vector2(power_factor, power_factor)
+	scale = Vector2(power_factor * direction, power_factor)
 	$HealthBar.value = size/max_size
 	
 func receive_heal(amount: float):
@@ -141,15 +149,15 @@ func receive_heal(amount: float):
 
 func recieve_damage(amount: float):	
 	set_size(max(0, size - amount))
-	if size == 0:	
-		die()
-	#match state:
-		#UnitState.Growing:
-			#if size == 0:	
-				#die()
-		#_:
-			#if size < grown_size:	
-				#set_state(UnitState.Growing)
+	#if size == 0:	
+		#die()
+	match state:
+		UnitState.Growing:
+			if size == 0:	
+				die()
+		_:
+			if size < grown_size:	
+				set_state(UnitState.Growing)
 
 func die():
 	target = null
@@ -175,6 +183,12 @@ func scan_for_target() -> Mushroom:
 		if can_use_target(node):
 			return node
 	return null
+	
+func get_bullet_hit_point():
+	return $BulletHitPoint.global_position
+	
+func is_borrowed():
+	return state == UnitState.Borrowed or state == UnitState.BorrowedAttacking or state == UnitState.BorrowedAttackCooldown
 	
 func msg(msg: String):
 	print("%s:%s	%s	%s	%s " % [Time.get_ticks_msec(), get_instance_id(), Player.keys()[player], UnitState.keys()[state], msg])		

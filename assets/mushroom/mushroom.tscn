@@ -12,9 +12,9 @@ script = ExtResource("1_rdg2v")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_xtkcv")
-animation = &"Growing"
+animation = &"Attacking"
 frame = 3
-frame_progress = 0.508724
+frame_progress = 0.798537
 offset = Vector2(0, -253)
 
 [node name="VisionArea" type="Area2D" parent="."]
@@ -38,6 +38,12 @@ position = Vector2(0, -253)
 shape = SubResource("RectangleShape2D_qqeta")
 
 [node name="StateTimer" type="Timer" parent="."]
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(101, -191)
+
+[node name="BulletHitPoint" type="Marker2D" parent="."]
+position = Vector2(0, -253)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
