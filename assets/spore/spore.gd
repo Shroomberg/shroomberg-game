@@ -1,4 +1,4 @@
-class_name Mushroom extends Unit
+class_name Spore extends Unit
 
 enum UnitState { Idle, PreparingAction, ExecutingAction, Dead }
 
@@ -6,7 +6,7 @@ var state: UnitState = UnitState.Idle
 
 func _ready():
 	sprite = $Sprite2D
-	set_state(UnitState.Idle)
+	set_state(UnitState.PreparingAction)
 	super._ready()	
 	
 func _physics_process(delta: float) -> void:

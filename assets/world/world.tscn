@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=6 format=3 uid="uid://c46cu51mploew"]
 
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
-[ext_resource type="PackedScene" uid="uid://36sugoftp1op" path="res://assets/unit/unit.tscn" id="2_l57e8"]
+[ext_resource type="PackedScene" uid="uid://36sugoftp1op" path="res://assets/warrior/warrior.tscn" id="2_l57e8"]
 [ext_resource type="Script" uid="uid://5vvmgp8bve11" path="res://assets/camera/camera_2d.gd" id="3_88ng3"]
 [ext_resource type="PackedScene" uid="uid://otoht3lqk2dl" path="res://assets/mushroom/mushroom.tscn" id="4_t3mbi"]
+[ext_resource type="PackedScene" uid="uid://di6xmrit68pnk" path="res://assets/spore/spore.tscn" id="5_aekxa"]
 
 [node name="World" type="Node2D"]
 
@@ -11,7 +12,6 @@
 
 [node name="Unit" parent="." instance=ExtResource("2_l57e8")]
 position = Vector2(-334, -32)
-max_hp = 20.0
 damage = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -20,9 +20,19 @@ zoom = Vector2(2, 2)
 script = ExtResource("3_88ng3")
 
 [node name="Unit2" parent="." instance=ExtResource("2_l57e8")]
-position = Vector2(473, -32)
+position = Vector2(485, -32)
 damage = 2.0
-direction = -1
+player = 1
 
 [node name="Mushroom" parent="." instance=ExtResource("4_t3mbi")]
-position = Vector2(-427, -64)
+position = Vector2(-1256, -1)
+
+[node name="Spore" parent="." instance=ExtResource("5_aekxa")]
+position = Vector2(-915, 0)
+
+[node name="Spore2" parent="." instance=ExtResource("5_aekxa")]
+position = Vector2(996, 0)
+
+[node name="Mushroom2" parent="." instance=ExtResource("4_t3mbi")]
+position = Vector2(1515, 0)
+player = 1

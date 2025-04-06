@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://otoht3lqk2dl"]
+[gd_scene load_steps=10 format=3 uid="uid://di6xmrit68pnk"]
 
-[ext_resource type="Script" uid="uid://daxtr7h5xigmt" path="res://assets/mushroom/mushroom.gd" id="1_u4eak"]
-[ext_resource type="Texture2D" uid="uid://v14buj2w3kbv" path="res://assets/mushroom/pixil-frame-0.png" id="2_xtkcv"]
+[ext_resource type="Script" uid="uid://cmry6rs347fb3" path="res://assets/spore/spore.gd" id="1_6v6i8"]
+[ext_resource type="Texture2D" uid="uid://v14buj2w3kbv" path="res://assets/mushroom/pixil-frame-0.png" id="2_1rvgw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtkcv"]
-size = Vector2(61, 125)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6v6i8"]
+size = Vector2(31, 71)
 
 [sub_resource type="Animation" id="Animation_6v6i8"]
 resource_name = "PreparingAction"
@@ -79,17 +79,16 @@ _data = {
 &"RESET": SubResource("Animation_hvvbo")
 }
 
-[node name="Mushroom" type="CharacterBody2D"]
-script = ExtResource("1_u4eak")
+[node name="Spore" type="CharacterBody2D"]
+script = ExtResource("1_6v6i8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-13, -120)
-scale = Vector2(1.72656, 1.89844)
-texture = ExtResource("2_xtkcv")
+position = Vector2(-6.50758, -65.0758)
+texture = ExtResource("2_1rvgw")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
-position = Vector2(-4.5, -62.5)
-shape = SubResource("RectangleShape2D_xtkcv")
+position = Vector2(0, -36.8763)
+shape = SubResource("RectangleShape2D_6v6i8")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -97,10 +96,12 @@ libraries = {
 }
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -90.0
-offset_top = -235.0
-offset_right = 75.0
-offset_bottom = -216.0
+offset_left = -50.0
+offset_top = -130.0
+offset_right = 50.0
+offset_bottom = -117.0
 max_value = 1.0
 value = 1.0
 show_percentage = false
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
