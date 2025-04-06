@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v14buj2w3kbv"
-path="res://.godot/imported/pixil-frame-0.png-19da160fa0fbd2dfeac1088755f4f03e.ctex"
+uid="uid://c3h2nch8aw7c3"
+path="res://.godot/imported/main_attack0000.png-478ccdbe62777c95f26edc18ecc0c47f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mushroom/pixil-frame-0.png"
-dest_files=["res://.godot/imported/pixil-frame-0.png-19da160fa0fbd2dfeac1088755f4f03e.ctex"]
+source_file="res://assets/mushroom/sprite/attack/main_attack0000.png"
+dest_files=["res://.godot/imported/main_attack0000.png-478ccdbe62777c95f26edc18ecc0c47f.ctex"]
 
 [params]
 
