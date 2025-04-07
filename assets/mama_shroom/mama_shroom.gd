@@ -1,20 +1,5 @@
 class_name MamaMushroom extends Mushroom
 
-signal on_borrow
-signal on_unborrow
-
-enum UnitState {
-	NA,
-	Growing, 
-	Borrowing, Borrowed, Unborrowing, 
-	BorrowedAttacking, BorrowedAttackCooldown, 	
-	Moving, Attacking, AttackCooldown,
-	Dead
-}
-	
-enum Player { Left, Right }
-
-@export var player: Player = Player.Left
 @export var max_size: float = 4
 @export var grown_size: float = 2
 @export var speed: float = 100.0
@@ -26,17 +11,14 @@ enum Player { Left, Right }
 
 const BULLET_SCENE = preload("res://assets/bullet/bullet.tscn")
 
-@export var state: UnitState
-@export var size: float
 var power_factor: float 
 var target: Mushroom
 var borrow_requested: bool
 var direction: int
-var world: World
 
 func _ready():
+	super._ready()
 	borrow_requested = false
-	world = get_parent() as World
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)
 	$AttackArea/Shape.scale = Vector2(action_range, action_range)*1.1
 	if player == Player.Right:
@@ -67,12 +49,8 @@ func _on_state_timer_timeout():
 	msg("timer")
 	match state:
 		UnitState.Unborrowing:
-			on_unborrow.emit(self)
-			world.unborrow_mushroom(self)
 			set_state(UnitState.Moving)
 		UnitState.Borrowing:
-			on_borrow.emit(self)
-			world.borrow_mushroom(self)
 			set_state(UnitState.Borrowed)
 		UnitState.Attacking, UnitState.BorrowedAttacking:
 			do_target_attack()
@@ -152,11 +130,8 @@ func do_target_attack():
 
 func move(delta: float):	
 	position.x += direction * speed * delta * power_factor
-	if borrow_requested:		
-		var borrow_position = world.get_closest_free_position(position.x, direction)		
-		if abs(borrow_position - position.x) < 5:
-			position.x = borrow_position
-			borrow()
+	if borrow_requested and can_borrow_here():		
+		borrow()
 	
 func grow():
 	set_state(UnitState.Borrowed)
@@ -185,7 +160,7 @@ func recieve_damage(amount: float):
 		_:
 			if size < grown_size:	
 				set_state(UnitState.Growing)
-
+	
 func die():
 	target = null
 	set_state(UnitState.Dead)
