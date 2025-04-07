@@ -15,6 +15,11 @@ run/main_scene="uid://dnest5ebnww2j"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+mouse_cursor/custom_image="uid://cnla7fqspjoiw"
+mouse_cursor/custom_image_hotspot=Vector2(48, 1)
+
 [dotnet]
 
 project/assembly_name="forestree"

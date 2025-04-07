@@ -6,8 +6,23 @@ var speed := 400
 # Panning
 var dragging := false
 var last_mouse_position := Vector2.ZERO
+var completedCentering := true
+var centerOnPosition := Vector2.ZERO
+var centerTimeRemaining
+
+func slideToPosition(newPosition: Vector2, time: float):
+	completedCentering = false
+	centerTimeRemaining = time
+	centerOnPosition = newPosition
 
 func _process(delta):
+	if !completedCentering:
+		position += (centerOnPosition - position)/centerTimeRemaining * delta
+		centerTimeRemaining -= delta
+		if (position - centerOnPosition).length() < 10:
+			completedCentering = true
+		return
+	
 	var velocity := Vector2.ZERO
 
 	if Input.is_action_pressed("move_up"):

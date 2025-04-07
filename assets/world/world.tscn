@@ -14,10 +14,14 @@ script = ExtResource("1_aekxa")
 z_index = -1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-861, -1846)
 script = ExtResource("3_88ng3")
 
 [node name="Roots" parent="." instance=ExtResource("4_t3mbi")]
 z_index = 1
+
+[node name="CameraStartPosition" type="Marker2D" parent="."]
+position = Vector2(-772, -380)
 
 [node name="RootGrothTimer" type="Timer" parent="."]
 process_callback = 0

@@ -9,8 +9,8 @@ var mushroom_info: Dictionary[int, Mushroom] = {}
 var closest_root_mushroom: Dictionary[int, Mushroom] = {}
 var closest_borrowed_mushroom: Dictionary[int, Mushroom] = {}
 
-func _ready() -> void:
-	pass
+func _ready():
+	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
 
 func get_closest_free_position(position: float, direction: int) -> float:
 	var closest_tile = get_closest_tile(position, direction)
