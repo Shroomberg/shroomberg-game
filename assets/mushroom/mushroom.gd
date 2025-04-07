@@ -1,5 +1,8 @@
 class_name Mushroom extends CharacterBody2D
 
+signal on_borrow
+signal on_unborrow
+
 enum UnitState {
 	NA,
 	Growing, 
@@ -28,15 +31,12 @@ const BULLET_SCENE = preload("res://assets/bullet/bullet.tscn")
 var power_factor: float 
 var target: Mushroom
 var borrow_requested: bool
-var borrow_position: float
-var direction: float
+var direction: int
 var world: World
-var roots: Roots
 
 func _ready():
 	borrow_requested = false
 	world = get_parent() as World
-	roots = world.find_child("Roots")
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)
 	if player == Player.Right:
 		direction = -1
@@ -48,7 +48,8 @@ func _ready():
 		set_state(UnitState.Growing)	
 	else:		
 		var init_state = state
-		state = 0
+		# just to reinit state
+		state = UnitState.NA
 		set_size(size)
 		set_state(init_state)
 
@@ -59,17 +60,18 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 		UnitState.Borrowed:	
 			unborrow()		
 		UnitState.Moving:
-			borrow_position = roots.get_closest_tile(position.x, direction)
 			borrow_requested = true
-			msg("borrow_position: "+str(borrow_position))
 
 func _on_state_timer_timeout():
 	msg("timer")
 	match state:
 		UnitState.Unborrowing:
+			on_unborrow.emit(self)
+			world.unborrow_mushroom(self)
 			set_state(UnitState.Moving)
 		UnitState.Borrowing:
-			roots.spawn_root(borrow_position)
+			on_borrow.emit(self)
+			world.borrow_mushroom(self)
 			set_state(UnitState.Borrowed)
 		UnitState.Attacking, UnitState.BorrowedAttacking:
 			do_target_attack()
@@ -148,11 +150,12 @@ func do_target_attack():
 	#target.recieve_damage(damage)	
 
 func move(delta: float):	
-	var old_position = position.x
 	position.x += direction * speed * delta
-	if borrow_requested and borrow_position >= min(old_position, position.x) and borrow_position <= max(old_position, position.x):
-		position.x = borrow_position
-		borrow()
+	if borrow_requested:		
+		var borrow_position = world.get_closest_free_position(position.x, direction)		
+		if abs(borrow_position - position.x) < 5:
+			position.x = borrow_position
+			borrow()
 	
 func grow():
 	set_state(UnitState.Borrowed)
