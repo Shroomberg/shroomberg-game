@@ -20,7 +20,7 @@ tile_map_data = PackedByteArray("AAD5/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD7/wAAAQAAAAA
 [node name="Spitter" parent="Terrain/Mushrooms" instance=ExtResource("5_aekxa")]
 position = Vector2(-856, -4)
 action_range = 20.0
-speed = 500.0
+speed = 200.0
 state = 7
 size = 4.0
 

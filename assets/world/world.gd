@@ -32,8 +32,8 @@ func get_borrowed_mushroom(position: int) -> Mushroom:
 			return q
 	return null
 
-func is_cell_free_to_grow(position: int) -> bool:
-	for d in range(0, min_groth_distance):
+func is_cell_free(position: int, distance: int) -> bool:
+	for d in range(0, distance):
 		if get_borrowed_mushroom(position + d):
 			return false
 		if get_borrowed_mushroom(position - d):
@@ -60,7 +60,7 @@ func grow_mushroom(position: int, delta: float):
 			mushroom.receive_heal(delta * root_heal_rate)
 		else:			
 			mushroom.recieve_damage(delta * root_decay_rate)
-	elif is_cell_free_to_grow(position):
+	elif is_cell_free(position, min_groth_distance):
 		var owner = get_root_owner(position)		
 		if roots[position] and owner:
 			var spore = owner.get_spore()
