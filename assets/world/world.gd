@@ -1,5 +1,8 @@
 class_name World extends Node
 
+signal on_win
+signal on_loose
+
 @export var map_size: int = 10;
 @export var min_groth_distance: int = 3;
 
@@ -116,3 +119,11 @@ func _physics_process(delta: float):
 	
 func msg(msg: String):
 	print("%s: %s" % [Time.get_ticks_msec(), msg])		
+
+
+func _on_mama_mushroom_on_death() -> void:
+	on_win.emit()
+
+
+func _on_mama_mushroom_2_on_death() -> void:
+	on_loose.emit()

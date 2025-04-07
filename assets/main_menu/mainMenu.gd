@@ -81,9 +81,8 @@ func open_win():
 	open()
 	label.text = "You win!"
 	resume_button.hide()
-	pass
-	
+ 	
 func open_loose():
+	open()
 	label.text = "You loose!"
 	resume_button.hide()
-	pass

@@ -38,3 +38,6 @@ script = ExtResource("3_88ng3")
 
 [node name="CameraStartPosition" type="Marker2D" parent="."]
 position = Vector2(-772, -380)
+
+[connection signal="on_death" from="Terrain/Mushrooms/MamaMushroom" to="." method="_on_mama_mushroom_on_death"]
+[connection signal="on_death" from="Terrain/Mushrooms/MamaMushroom2" to="." method="_on_mama_mushroom_2_on_death"]
