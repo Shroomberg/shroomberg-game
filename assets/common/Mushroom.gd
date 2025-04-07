@@ -35,6 +35,10 @@ var cell_id: int
 var current_spore_cooldown = spore_cooldown
 				
 func _ready() -> void:
+	if player == Player.Right:
+		modulate = modulate.from_rgba8(255, 190, 190)
+	else:
+		modulate = modulate.from_rgba8(190, 190, 255)
 	pass				
 				
 func is_dead() -> bool:
@@ -69,7 +73,7 @@ func _physics_process(delta: float):
 			move(delta)
 
 func move(delta: float):	
-	position.x += direction * speed * delta * power_factor
+	position.x += direction * speed * delta / power_factor
 	if borrow_requested and can_borrow_here():		
 		borrow()
 

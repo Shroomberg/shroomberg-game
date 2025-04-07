@@ -95,15 +95,6 @@ position = Vector2(0, -54)
 shape = SubResource("RectangleShape2D_qqeta")
 debug_color = Color(1, 0.0117647, 0.0117647, 0.333333)
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -47.0
-offset_top = -128.0
-offset_right = 47.0
-offset_bottom = -110.0
-max_value = 1.0
-value = 1.0
-show_percentage = false
-
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -54)
 shape = SubResource("RectangleShape2D_qqeta")

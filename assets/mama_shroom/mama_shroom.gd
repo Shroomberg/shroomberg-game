@@ -76,7 +76,6 @@ func set_state(new_state: UnitState):
 	state = new_state
 	msg("new state")
 	$Sprite.play(UnitState.keys()[new_state])	
-	$HealthBar.visible = new_state != UnitState.Dead
 	decide_new_action()
 
 func borrow():
@@ -118,10 +117,6 @@ func do_target_attack():
 	
 func grow():
 	set_state(UnitState.Borrowed)
-
-func set_size(new_size: float):
-	super.set_size(new_size)
-	$HealthBar.value = size/max_size
 
 func decide_new_action():	
 	match state:

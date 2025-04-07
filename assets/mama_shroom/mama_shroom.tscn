@@ -11,6 +11,7 @@ input_pickable = true
 script = ExtResource("1_one22")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(13, 39)
 sprite_frames = ExtResource("2_one22")
 animation = &"Attacking"
 offset = Vector2(0, -253)
@@ -28,15 +29,6 @@ debug_color = Color(1, 0.0117647, 0.0117647, 0.333333)
 position = Vector2(0, -253)
 shape = SubResource("RectangleShape2D_qqeta")
 debug_color = Color(1, 0.0117647, 0.0117647, 0.333333)
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -273.0
-offset_top = -593.0
-offset_right = 290.0
-offset_bottom = -538.0
-max_value = 1.0
-value = 1.0
-show_percentage = false
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -253)
