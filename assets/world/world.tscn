@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=7 format=4 uid="uid://c46cu51mploew"]
 
 [ext_resource type="Script" uid="uid://yblxsvk27yqc" path="res://assets/world/world.gd" id="1_aekxa"]
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
 [ext_resource type="Script" uid="uid://5vvmgp8bve11" path="res://assets/camera/camera_2d.gd" id="3_88ng3"]
 [ext_resource type="PackedScene" uid="uid://6eoxs08sqbay" path="res://assets/roots/roots.tscn" id="4_t3mbi"]
+[ext_resource type="PackedScene" uid="uid://w2flpen4p6uf" path="res://assets/AI/AI.tscn" id="6_hukdr"]
 [ext_resource type="PackedScene" uid="uid://cqqbt3q78x2s1" path="res://assets/mama_shroom/mama_shroom.tscn" id="6_r2l5x"]
 
 [node name="World" type="Node2D"]
@@ -38,6 +39,9 @@ script = ExtResource("3_88ng3")
 
 [node name="CameraStartPosition" type="Marker2D" parent="."]
 position = Vector2(-772, -380)
+
+[node name="Ai" parent="." node_paths=PackedStringArray("world") instance=ExtResource("6_hukdr")]
+world = NodePath("..")
 
 [connection signal="on_death" from="Terrain/Mushrooms/LeftMama" to="." method="_on_left_mama_on_death"]
 [connection signal="on_death" from="Terrain/Mushrooms/RightMama" to="." method="_on_right_mama_on_death"]

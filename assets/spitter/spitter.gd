@@ -30,6 +30,8 @@ func _ready():
 		set_state(init_state)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
+	if player == Player.Right:
+		return
 	if event is not InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT or !event.pressed:
 		return	
 	match state:
