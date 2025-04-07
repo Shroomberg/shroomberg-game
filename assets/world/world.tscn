@@ -18,6 +18,7 @@ z_index = -1
 [node name="Spitter" parent="Terrain/Mushrooms" instance=ExtResource("5_aekxa")]
 position = Vector2(-1090, 0)
 action_range = 20.0
+speed = 500.0
 state = 7
 size = 4.0
 

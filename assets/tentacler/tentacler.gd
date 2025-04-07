@@ -117,14 +117,8 @@ func grow():
 	set_state(UnitState.Borrowed)
 
 func set_size(new_size: float):
-	size = new_size
-	power_factor = sqrt(size / max_size)
-	scale = Vector2(power_factor * direction, power_factor)
+	super.set_size(new_size)
 	$HealthBar.value = size/max_size
-
-func die():
-	target = null
-	set_state(UnitState.Dead)
 
 func decide_new_action():	
 	match state:

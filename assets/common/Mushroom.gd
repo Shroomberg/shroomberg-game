@@ -13,7 +13,7 @@ enum UnitState {
 @export var max_size: float = 4
 @export var grown_size: float = 2
 @export var ungrown_decay_rate: float = 0.1
-@export var min_size: float = 1
+@export var min_size: float = 2
 
 @export var speed: float = 100.0
  
@@ -33,7 +33,7 @@ func _ready() -> void:
 	pass				
 				
 func is_dead() -> bool:
-	return state == UnitState.Dead
+	return state == UnitState.Dead or is_queued_for_deletion()
 	
 func is_borrowed() -> bool:
 	return state in [UnitState.Growing, UnitState.Borrowing, UnitState.Borrowed, UnitState.BorrowedAttacking, UnitState.BorrowedAttackCooldown]
@@ -54,20 +54,13 @@ func receive_heal(amount: float):
 
 func recieve_damage(amount: float):	
 	set_size(max(0, size - amount))
-	match state:
-		UnitState.Growing:
-			if size == 0:	
-				die()
-		_:
-			if size < min_size:		
-				die()	
+	if size < min_size:		
+		die()	
 					
 func _physics_process(delta: float):
 	match state:
 		UnitState.Moving:
-			move(delta)			
-		UnitState.Growing:
-			recieve_damage(delta * ungrown_decay_rate)
+			move(delta)
 
 func move(delta: float):	
 	position.x += direction * speed * delta * power_factor
@@ -75,10 +68,23 @@ func move(delta: float):
 		borrow()
 
 func die():
-	pass	
+	target = null
+	set_state(UnitState.Dead)
+	queue_free()
+	
+func set_size(new_size: float):
+	size = new_size
+	power_factor = size / max_size
+	scale = Vector2(power_factor * direction, power_factor)	
+
+func get_spore() -> Mushroom:
+	var spore = self.duplicate()
+	spore.size = 0
+	return spore	
+	
 func grow():
 	pass
 func borrow():
 	pass
-func set_size(new_size: float):
+func set_state(new_state: UnitState):
 	pass

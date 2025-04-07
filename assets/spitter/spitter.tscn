@@ -6,22 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqeta"]
 size = Vector2(60.0625, 107.758)
 
-[sub_resource type="Animation" id="Animation_egaq4"]
-resource_name = "click_unborrowed"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(3.4822, 3.4822, 3.4822),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -60), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_41bgq"]
 length = 0.001
 tracks/0/type = "value"
@@ -65,6 +49,22 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1.4), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_egaq4"]
+resource_name = "click_unborrowed"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(3.4822, 3.4822, 3.4822),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -60), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t368b"]
 _data = {
 &"RESET": SubResource("Animation_41bgq"),
@@ -78,9 +78,7 @@ script = ExtResource("1_egaq4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_egaq4")
-animation = &"Attacking"
-frame = 3
-frame_progress = 0.641438
+animation = &"Dead"
 offset = Vector2(-5, -64)
 
 [node name="VisionArea" type="Area2D" parent="."]
