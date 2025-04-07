@@ -82,6 +82,13 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 32
 text = "Resume"
 
+[node name="5xSpeedCheckBox" type="CheckBox" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 32
+text = "5x game speed
+"
+
 [node name="MusicCheckBox" type="CheckBox" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -116,6 +123,7 @@ texture = ExtResource("4_3u8il")
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="toggled" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/5xSpeedCheckBox" to="." method="_on_x_speed_check_box_toggled"]
 [connection signal="toggled" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/MusicCheckBox" to="." method="_on_music_check_box_toggled"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -107,6 +107,11 @@ func open_start():
 	newgame_button.show()
 	
 
-
 func _on_new_game_button_pressed() -> void:
 	close()
+
+func _on_x_speed_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		Engine.time_scale = 5
+	else:
+		Engine.time_scale = 1

@@ -18,8 +18,7 @@ signal on_loose
 var mushrooms: Dictionary[int, Array]
 var roots: Dictionary[int, float]
 func _ready():
-	Engine.time_scale = 5
-	
+
 	for q in range(-map_size - 10, map_size + 10):
 		mushrooms[q] = []
 		roots[q] = 0

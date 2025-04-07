@@ -32,11 +32,11 @@ size = 4.0
 z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-8153, -2299)
+position = Vector2(-7429, -2340)
 script = ExtResource("3_88ng3")
 
 [node name="CameraStartPosition" type="Marker2D" parent="."]
-position = Vector2(-8153, -191)
+position = Vector2(-7281, -235)
 
 [node name="Ai" parent="." node_paths=PackedStringArray("world") instance=ExtResource("6_hukdr")]
 world = NodePath("..")
