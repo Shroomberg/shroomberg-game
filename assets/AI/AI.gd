@@ -3,18 +3,45 @@ class_name AI extends Node
 @export var world: World
 
 var rng = RandomNumberGenerator.new()
+
 func _on_timer_timeout() -> void:
-	var my_units = world.get_player_mushrooms(1)
-	if my_units.size() < 5:
+	var my_units = world.get_player_mushrooms(Mushroom.Player.Right)
+	var spitters = my_units.filter(func(q): return q is Spitter)
+	var tentaclers = my_units.filter(func(q): return q is Tentacler)
+	var mama = my_units.filter(func(q): return q is MamaMushroom).front()
+	
+	var random = ceil(rng.randf_range(0, spitters.size() / 4))
+	for q in range(0, random):
+		move_spitter(spitters.pick_random())
+	
+	random = ceil(rng.randf_range(0, tentaclers.size() / 4))
+	for q in range(0, random):
+		move_tentacler(tentaclers.pick_random())
+	
+	if rng.randf_range(0, 1) < 0.05:
+		move_mama(mama)
+		
+func move_spitter(unit: Mushroom):	
+	if unit.is_dead():
 		return
-	var move_random_units = round(rng.randf_range(0, my_units.size() / 3))
-	while move_random_units > 0:
-		move_random_units -= 1
-		var unit = my_units.pick_random()
-		if unit.is_dead():
-			continue
-		if unit.state == Mushroom.UnitState.Borrowed:
-			unit.unborrow()
-		else:
-			unit.borrow_requested = true
-	pass # Replace with function body.
+	if unit.state == Mushroom.UnitState.Borrowed:
+		unit.unborrow()
+	else:
+		unit.borrow_requested = true		
+				
+func move_tentacler(unit: Mushroom):	
+	if unit.is_dead():
+		return
+	if unit.state == Mushroom.UnitState.Borrowed:
+		unit.unborrow()
+	else:
+		unit.borrow_requested = true	
+			
+func move_mama(unit: Mushroom):	
+	if unit.is_dead():
+		return
+	if unit.state == Mushroom.UnitState.Borrowed:
+		unit.unborrow()
+	else:
+		unit.borrow_requested = true
+		
