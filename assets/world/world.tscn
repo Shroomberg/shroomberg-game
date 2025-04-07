@@ -1,43 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=7 format=3 uid="uid://c46cu51mploew"]
 
 [ext_resource type="Script" uid="uid://yblxsvk27yqc" path="res://assets/world/world.gd" id="1_aekxa"]
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
-[ext_resource type="PackedScene" uid="uid://otoht3lqk2dl" path="res://assets/mushroom/mushroom.tscn" id="2_l57e8"]
 [ext_resource type="Script" uid="uid://5vvmgp8bve11" path="res://assets/camera/camera_2d.gd" id="3_88ng3"]
 [ext_resource type="PackedScene" uid="uid://6eoxs08sqbay" path="res://assets/roots/roots.tscn" id="4_t3mbi"]
+[ext_resource type="PackedScene" uid="uid://be2ometqfylui" path="res://assets/spitter/spitter.tscn" id="5_aekxa"]
+[ext_resource type="PackedScene" uid="uid://c1jjgrqtasqyc" path="res://assets/tentacler/tentacler.tscn" id="6_r2l5x"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_aekxa")
 
 [node name="Terrain" parent="." instance=ExtResource("1_c5pkw")]
+z_index = -1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_88ng3")
-
-[node name="Mushroom" parent="." instance=ExtResource("2_l57e8")]
-position = Vector2(-1016, 0)
-max_size = 3.0
-grown_size = 1.0
-state = 7
-size = 3.0
-
-[node name="Mushroom2" parent="." instance=ExtResource("2_l57e8")]
-position = Vector2(-492, 0)
-max_size = 3.0
-grown_size = 1.0
-state = 7
-size = 3.0
 
 [node name="Roots" parent="." instance=ExtResource("4_t3mbi")]
 z_index = 1
 
 [node name="RootGrothTimer" type="Timer" parent="."]
+process_callback = 0
 wait_time = 0.3
 autostart = true
 
 [node name="RootDecayTimer" type="Timer" parent="."]
+process_callback = 0
 wait_time = 2.0
 autostart = true
+
+[node name="Spitter" parent="." instance=ExtResource("5_aekxa")]
+position = Vector2(-1090, 0)
+action_range = 20.0
+state = 7
+size = 4.0
+
+[node name="Spitter4" parent="." instance=ExtResource("5_aekxa")]
+position = Vector2(-1262, 0)
+action_range = 20.0
+state = 7
+size = 4.0
+
+[node name="Spitter3" parent="." instance=ExtResource("5_aekxa")]
+position = Vector2(-1177, 0)
+action_range = 20.0
+state = 7
+size = 4.0
+
+[node name="Spitter2" parent="." instance=ExtResource("5_aekxa")]
+position = Vector2(260, 0)
+player = 1
+action_range = 20.0
+state = 7
+size = 4.0
+
+[node name="Tentacler" parent="." instance=ExtResource("6_r2l5x")]
+position = Vector2(765, 0)
+player = 1
+max_size = 20.0
+speed = 300.0
+damage = 1.5
+action_range = 1.5
+attack_duration = 0.6
+attack_cooldown = 0.0
+state = 7
+size = 20.0
 
 [connection signal="timeout" from="RootGrothTimer" to="." method="_on_root_groth_timer_timeout"]
 [connection signal="timeout" from="RootDecayTimer" to="." method="_on_root_decay_timer_timeout"]

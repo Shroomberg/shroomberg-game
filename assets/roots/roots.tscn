@@ -3,4 +3,5 @@
 [ext_resource type="TileSet" uid="uid://bmfar7ufv5tdk" path="res://assets/roots/tileset.tres" id="2_0fc46"]
 
 [node name="Roots" type="TileMapLayer"]
+modulate = Color(1, 1, 1, 0.52549)
 tile_set = ExtResource("2_0fc46")
