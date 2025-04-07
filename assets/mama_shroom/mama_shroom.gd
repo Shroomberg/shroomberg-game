@@ -37,8 +37,10 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 		return	
 	match state:
 		UnitState.Borrowed:	
+			$AnimationPlayer.play("click_borrowed")
 			unborrow()		
 		UnitState.Moving:
+			$AnimationPlayer.play("click_unborrowed")
 			borrow_requested = true
 
 func _on_state_timer_timeout():
