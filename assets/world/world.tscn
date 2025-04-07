@@ -12,6 +12,7 @@ script = ExtResource("1_aekxa")
 [node name="Terrain" parent="." instance=ExtResource("1_c5pkw")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-861, -1846)
 script = ExtResource("3_88ng3")
 
 [node name="Mushroom" parent="." instance=ExtResource("2_l57e8")]
@@ -23,3 +24,6 @@ size = 3.0
 
 [node name="Roots" parent="." instance=ExtResource("4_t3mbi")]
 z_index = 1
+
+[node name="CameraStartPosition" type="Marker2D" parent="."]
+position = Vector2(-772, -380)
