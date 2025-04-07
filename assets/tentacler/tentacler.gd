@@ -8,9 +8,9 @@ class_name Tentacler extends Mushroom
 
 func _ready():
 	super._ready()
-	max_size = 10
-	grown_size = 6
-	speed = 150	
+	max_size = 14
+	grown_size = 8
+	speed = 130	
 	attack_cooldown = 0.5
 	damage = 2
 	action_range = 2
