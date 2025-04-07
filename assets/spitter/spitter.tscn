@@ -12,14 +12,14 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(3.4822, 3.4822, 3.4822),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -60), Vector2(0, 0)]
+"values": [Vector2(1, 1), Vector2(2, 0.5), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_41bgq"]
@@ -62,7 +62,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(3.86375, 3.86375, 3.86375),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1.4), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1, 1.7), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t368b"]
@@ -78,9 +78,7 @@ script = ExtResource("1_egaq4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_egaq4")
-animation = &"Attacking"
-frame = 3
-frame_progress = 0.641438
+animation = &"Unborrowing"
 offset = Vector2(-5, -64)
 
 [node name="VisionArea" type="Area2D" parent="."]
