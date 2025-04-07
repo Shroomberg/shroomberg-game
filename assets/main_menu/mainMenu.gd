@@ -4,9 +4,8 @@ class_name MainMenu extends Control
 @export var fade_out_duration := 0.2
 
 @onready var center_cont := $ColorRect/CenterContainer as CenterContainer
-#@onready var resume_button := center_cont.get_node(^"VBoxContainer/ResumeButton") as Button
 @onready var resume_button := center_cont.get_node(^"VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton") as Button
-#@onready var resume_button := $ResumeButton as Button
+@onready var label := center_cont.get_node(^"VBoxContainer/HBoxContainer/VBoxContainer/Label") as Label
 
 
 func _ready() -> void:
@@ -58,6 +57,7 @@ func _on_quit_button_pressed() -> void:
 		get_tree().quit()
 
 func _on_restart_button_pressed() -> void:
+	resume_button.show()
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
@@ -75,3 +75,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			#tree.paused = not tree.paused
 			close()
 			get_tree().root.set_input_as_handled()
+
+
+func open_win():
+	open()
+	label.text = "You win!"
+	resume_button.hide()
+	pass
+	
+func open_loose():
+	label.text = "You loose!"
+	resume_button.hide()
+	pass
