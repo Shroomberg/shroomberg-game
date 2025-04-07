@@ -20,3 +20,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			_game_menu.close()
 		get_tree().root.set_input_as_handled()
+
+
+func _on_world_on_loose() -> void:
+	_game_menu.open_loose()
+
+func _on_world_on_win() -> void:
+	_game_menu.open_win()
+	

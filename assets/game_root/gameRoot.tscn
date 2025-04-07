@@ -21,3 +21,6 @@ autoplay = true
 max_distance = 30221.0
 attenuation = 4.31584e-05
 panning_strength = 0.0
+
+[connection signal="on_loose" from="World" to="." method="_on_world_on_loose"]
+[connection signal="on_win" from="World" to="." method="_on_world_on_win"]
