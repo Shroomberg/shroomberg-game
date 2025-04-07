@@ -13,7 +13,8 @@ script = ExtResource("1_bmflr")
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
-[node name="MainMenu" parent="Interface" instance=ExtResource("2_bmflr")]
+[node name="MainMenu" parent="Interface" node_paths=PackedStringArray("world") instance=ExtResource("2_bmflr")]
+world = NodePath("../../World")
 
 [node name="Music" parent="." instance=ExtResource("4_x6mg1")]
 stream = ExtResource("5_3w2mp")
