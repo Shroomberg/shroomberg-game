@@ -63,6 +63,8 @@ func receive_heal(amount: float):
 
 func recieve_damage(amount: float):	
 	set_size(max(0, size - amount))
+	if state == UnitState.Growing:
+		die()
 	if size < min_size:		
 		die()	
 					

@@ -10,8 +10,8 @@ func _ready():
 	super._ready()
 	max_size = 10
 	grown_size = 6
-	speed = 200	
-	attack_cooldown = 0
+	speed = 150	
+	attack_cooldown = 0.5
 	damage = 2
 	action_range = 2
 	

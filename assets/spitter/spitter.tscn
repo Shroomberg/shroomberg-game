@@ -79,7 +79,7 @@ script = ExtResource("1_egaq4")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_egaq4")
 animation = &"Unborrowing"
-offset = Vector2(-5, -64)
+offset = Vector2(-5, -59)
 
 [node name="VisionArea" type="Area2D" parent="."]
 

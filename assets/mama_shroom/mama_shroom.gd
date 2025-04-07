@@ -19,8 +19,8 @@ func _ready():
 	size = 100
 	speed = 50
 	attack_cooldown = 0
-	damage = 5
-	action_range = 20
+	action_range = 15
+	damage = 6
 	
 	borrow_requested = false
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)

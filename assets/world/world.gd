@@ -6,9 +6,9 @@ signal on_loose
 @export var map_size: int = 10;
 @export var min_groth_distance: int = 3;
 
-@export var root_decay_rate: float = 0.5
-@export var root_groth_rate: float = 2
-@export var root_heal_rate: float = 1
+@export var root_decay_rate: float = 0.3
+@export var root_groth_rate: float = 1
+@export var root_heal_rate: float = 0.7
 
 @export var root_distance_penalty: float = 0.75
 @export var max_root_size: float = 10
@@ -24,13 +24,17 @@ func _ready():
 		mushrooms[q] = []
 		roots[q] = 0
 		
+	roots[-map_size + 8] = max_root_size * root_distance_penalty* root_distance_penalty
 	roots[-map_size + 9] = max_root_size * root_distance_penalty
 	roots[-map_size + 10] = max_root_size
 	roots[-map_size + 11] = max_root_size* root_distance_penalty
+	roots[-map_size + 12] = max_root_size* root_distance_penalty* root_distance_penalty
 	
+	roots[map_size - 15] = max_root_size* root_distance_penalty* root_distance_penalty
 	roots[map_size - 16] = max_root_size* root_distance_penalty
 	roots[map_size - 17] = max_root_size
 	roots[map_size - 18] = max_root_size* root_distance_penalty
+	roots[map_size - 19] = max_root_size* root_distance_penalty* root_distance_penalty
 			
 	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
 
