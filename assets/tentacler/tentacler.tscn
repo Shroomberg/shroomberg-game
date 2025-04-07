@@ -1,10 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1jjgrqtasqyc"]
+[gd_scene load_steps=8 format=3 uid="uid://c1jjgrqtasqyc"]
 
 [ext_resource type="Script" uid="uid://chf56oq5hvylt" path="res://assets/tentacler/tentacler.gd" id="1_uselb"]
 [ext_resource type="SpriteFrames" uid="uid://de2e6rmlix4xn" path="res://assets/tentacler/tentacler.tres" id="2_uselb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqeta"]
 size = Vector2(79.25, 123.031)
+
+[sub_resource type="Animation" id="Animation_uselb"]
+resource_name = "click_borrowed"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(3.36358, 3.36358, 3.36358),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.7), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bssnc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kf8lp"]
+resource_name = "click_unborrowed"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(3.36358, 3.36358, 3.36358),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 0.7), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qj70"]
+_data = {
+&"RESET": SubResource("Animation_bssnc"),
+&"click_borrowed": SubResource("Animation_uselb"),
+&"click_unborrowed": SubResource("Animation_kf8lp")
+}
 
 [node name="Tentacler" type="CharacterBody2D"]
 input_pickable = true
@@ -40,6 +94,11 @@ one_shot = true
 
 [node name="BulletHitPoint" type="Marker2D" parent="."]
 position = Vector2(15, -64)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8qj70")
+}
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
