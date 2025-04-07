@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnest5ebnww2j"]
+[gd_scene load_steps=6 format=3 uid="uid://dnest5ebnww2j"]
 
 [ext_resource type="Script" uid="uid://b0cuisrpl4gpn" path="res://assets/game_root/gameRoot.gd" id="1_bmflr"]
 [ext_resource type="PackedScene" uid="uid://c46cu51mploew" path="res://assets/world/world.tscn" id="1_toj54"]
 [ext_resource type="PackedScene" uid="uid://qmhaxrcjyixl" path="res://assets/main_menu/mainMenu.tscn" id="2_bmflr"]
+[ext_resource type="PackedScene" uid="uid://cw1crkuqkhnvt" path="res://assets/music/music.tscn" id="4_x6mg1"]
+[ext_resource type="AudioStream" uid="uid://yffk8jcdsoxw" path="res://assets/music/song.mp3" id="5_3w2mp"]
 
 [node name="GameRoot" type="Node"]
 script = ExtResource("1_bmflr")
@@ -12,3 +14,7 @@ script = ExtResource("1_bmflr")
 [node name="Interface" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="Interface" instance=ExtResource("2_bmflr")]
+
+[node name="Music" parent="." instance=ExtResource("4_x6mg1")]
+stream = ExtResource("5_3w2mp")
+autoplay = true
