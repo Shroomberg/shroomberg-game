@@ -29,11 +29,11 @@ func _ready():
 	roots[-map_size + 11] = max_root_size* root_distance_penalty
 	roots[-map_size + 12] = max_root_size* root_distance_penalty* root_distance_penalty
 	
-	roots[map_size - 15] = max_root_size* root_distance_penalty* root_distance_penalty
+	roots[map_size - 13] = max_root_size* root_distance_penalty* root_distance_penalty
+	roots[map_size - 14] = max_root_size* root_distance_penalty
+	roots[map_size - 15] = max_root_size
 	roots[map_size - 16] = max_root_size* root_distance_penalty
-	roots[map_size - 17] = max_root_size
-	roots[map_size - 18] = max_root_size* root_distance_penalty
-	roots[map_size - 19] = max_root_size* root_distance_penalty* root_distance_penalty
+	roots[map_size - 17] = max_root_size* root_distance_penalty* root_distance_penalty
 			
 	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
 
