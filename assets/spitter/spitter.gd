@@ -10,6 +10,13 @@ const BULLET_SCENE = preload("res://assets/bullet/bullet.tscn")
 
 func _ready():
 	super._ready()
+	max_size = 6
+	grown_size = 4
+	speed = 100
+	attack_cooldown = 3
+	damage = 3
+	action_range = 10
+	
 	target = null
 	borrow_requested = false
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)

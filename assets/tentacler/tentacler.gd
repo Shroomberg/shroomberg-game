@@ -8,6 +8,13 @@ class_name Tentacler extends Mushroom
 
 func _ready():
 	super._ready()
+	max_size = 10
+	grown_size = 6
+	speed = 200	
+	attack_cooldown = 0
+	damage = 2
+	action_range = 2
+	
 	borrow_requested = false
 	world = get_parent() as World
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)

@@ -14,6 +14,14 @@ const spores = [
 
 func _ready():
 	super._ready()
+	state = UnitState.Borrowed
+	max_size = 100
+	size = 100
+	speed = 50
+	attack_cooldown = 0
+	damage = 5
+	action_range = 20
+	
 	borrow_requested = false
 	$VisionArea/Shape.scale = Vector2(action_range, action_range)
 	$AttackArea/Shape.scale = Vector2(action_range, action_range)*1.1
