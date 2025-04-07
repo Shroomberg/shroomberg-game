@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1jjgrqtasqyc"]
+
+[ext_resource type="Script" uid="uid://chf56oq5hvylt" path="res://assets/tentacler/tentacler.gd" id="1_uselb"]
+[ext_resource type="SpriteFrames" uid="uid://de2e6rmlix4xn" path="res://assets/tentacler/tentacler.tres" id="2_uselb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqeta"]
+size = Vector2(79.25, 123.031)
+
+[node name="Tentacler" type="CharacterBody2D"]
+input_pickable = true
+script = ExtResource("1_uselb")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_uselb")
+animation = &"AttackCooldown"
+offset = Vector2(0, -66)
+
+[node name="VisionArea" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="VisionArea"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_qqeta")
+debug_color = Color(1, 0.0117647, 0.0117647, 0.333333)
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_qqeta")
+debug_color = Color(1, 0.0117647, 0.0117647, 0.333333)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -85.0
+offset_top = -165.0
+offset_right = 88.0
+offset_bottom = -131.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_qqeta")
+
+[node name="StateTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="BulletHitPoint" type="Marker2D" parent="."]
+position = Vector2(15, -64)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_vision_area_body_exited"]
+[connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]
