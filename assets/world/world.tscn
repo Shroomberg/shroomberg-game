@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c46cu51mploew"]
+[gd_scene load_steps=7 format=3 uid="uid://c46cu51mploew"]
 
 [ext_resource type="Script" uid="uid://yblxsvk27yqc" path="res://assets/world/world.gd" id="1_aekxa"]
 [ext_resource type="PackedScene" uid="uid://5qbkx36w3pw6" path="res://assets/terrain/terrain.tscn" id="1_c5pkw"]
 [ext_resource type="Script" uid="uid://5vvmgp8bve11" path="res://assets/camera/camera_2d.gd" id="3_88ng3"]
 [ext_resource type="PackedScene" uid="uid://6eoxs08sqbay" path="res://assets/roots/roots.tscn" id="4_t3mbi"]
 [ext_resource type="PackedScene" uid="uid://be2ometqfylui" path="res://assets/spitter/spitter.tscn" id="5_aekxa"]
+[ext_resource type="PackedScene" uid="uid://cqqbt3q78x2s1" path="res://assets/mama_shroom/mama_shroom.tscn" id="6_r2l5x"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_aekxa")
@@ -19,6 +20,15 @@ position = Vector2(-1090, 0)
 action_range = 20.0
 state = 7
 size = 4.0
+
+[node name="MamaMushroom" parent="Terrain/Mushrooms" instance=ExtResource("6_r2l5x")]
+position = Vector2(1439, 0)
+action_range = 10.0
+attack_cooldown = 0.0
+max_size = 20.0
+player = 1
+state = 3
+size = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-772, -380)

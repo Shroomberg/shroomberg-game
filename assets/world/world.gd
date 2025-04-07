@@ -2,17 +2,21 @@ class_name World extends Node
 
 @export var map_size: int = 10;
 @export var min_groth_distance: int = 3;
+
 @export var root_decay_rate: float = 0.3
 @export var root_groth_rate: float = 3
+@export var root_heal_rate: float = 0.05
+
 @export var root_distance_penalty: float = 0.8
 @export var max_root_size: float = 10
+@export var min_root_size: float = 3
 @export var root_state_count: int = 5
 
 var mushrooms: Dictionary[int, Array]
 var roots: Dictionary[int, float]
 var root_owners: Dictionary[int, Mushroom]
 func _ready():
-	for q in range(-map_size, map_size):
+	for q in range(-map_size*2, map_size*2):
 		mushrooms[q] = []
 		roots[q] = 0
 		root_owners[q] = null
@@ -34,6 +38,8 @@ func is_cell_free_to_grow(position: int) -> bool:
 	for d in range(0, min_groth_distance):
 		if get_borrowed_mushroom(position + d):
 			return false
+		if get_borrowed_mushroom(position - d):
+			return false
 	return true
 
 func rebuild_mushrooms():
@@ -48,27 +54,44 @@ func apply_root_tiles():
 	for cell_id in range(-map_size, map_size):
 		var tile_id = round(roots[cell_id] * root_state_count / max_root_size) - 2;
 		$Roots.set_cell(Vector2i(cell_id, 0), tile_id, Vector2i.ZERO, 0)	
+	
+func try_grow_mushroom(position: int, delta: float):
+	var mushroom = get_borrowed_mushroom(position)
+	if mushroom:
+		mushroom.receive_heal(roots[position] * delta * root_heal_rate)
+	elif is_cell_free_to_grow(position):
+		var clone = root_owners[position].duplicate() as Mushroom
+		mushrooms[position].push_back(clone)
+		clone.position.x = $Terrain.map_to_local(Vector2i(position, 0)).x
+		clone.size = 0
+		$Terrain/Mushrooms.add_child(clone)
 		
 func natual_groth(delta: float):
 	var allowed_sizes: Dictionary[int, float] 	
+	# Calculate allowed sized
 	for cell_id in range(-map_size, map_size): 
 		var mushroom = get_borrowed_mushroom(cell_id)
-		if mushroom:
+		if mushroom && mushroom.is_grown():
 			allowed_sizes[cell_id] = max_root_size
 			root_owners[cell_id] = mushroom
 		else:			
 			var left = roots.get(cell_id - 1, 0)
 			var right = roots.get(cell_id + 1, 0)
-			allowed_sizes[cell_id] = floor(max(left, right) * root_distance_penalty)
-			if allowed_sizes[cell_id] == 0:
+			allowed_sizes[cell_id] = max(left, right) * root_distance_penalty
+			if allowed_sizes[cell_id] < min_root_size:
 				root_owners[cell_id] = null
+				allowed_sizes[cell_id] = 0
 			elif left > right:
 				root_owners[cell_id] = root_owners[cell_id - 1]
 			else:
 				root_owners[cell_id] = root_owners[cell_id + 1]		
 	
+	# Grow to allowed size
 	for cell_id in range(-map_size, map_size): 		
-		if roots[cell_id] > allowed_sizes[cell_id]:
+		if roots[cell_id] == allowed_sizes[cell_id]:
+			if root_owners[cell_id]:
+				try_grow_mushroom(cell_id, delta)
+		elif roots[cell_id] > allowed_sizes[cell_id]:
 			roots[cell_id] = max(allowed_sizes[cell_id], roots[cell_id] - delta * root_decay_rate)	
 		else:
 			roots[cell_id] = min(allowed_sizes[cell_id], roots[cell_id] + delta * root_groth_rate)
