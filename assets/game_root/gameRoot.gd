@@ -2,6 +2,11 @@ class_name GameRoot extends Node
 
 @onready var _game_menu := $Interface/MainMenu as MainMenu
 
+func _ready() -> void:
+	var tree := get_tree()
+	tree.paused = true
+	_game_menu.open_start()
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_fullscreen"):
 		var mode := DisplayServer.window_get_mode()

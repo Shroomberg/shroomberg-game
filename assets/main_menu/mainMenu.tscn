@@ -68,7 +68,14 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
+[node name="NewGameButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "New game
+"
+
 [node name="ResumeButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
@@ -85,6 +92,7 @@ text = "Music
 "
 
 [node name="RestartButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
@@ -106,6 +114,7 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("4_3u8il")
 
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="toggled" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/MusicCheckBox" to="." method="_on_music_check_box_toggled"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
