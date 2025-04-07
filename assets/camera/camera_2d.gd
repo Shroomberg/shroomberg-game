@@ -19,8 +19,9 @@ func _process(delta):
 	if !completedCentering:
 		position += (centerOnPosition - position)/centerTimeRemaining * delta
 		centerTimeRemaining -= delta
-		if (position - centerOnPosition).length() < 10:
+		if (position - centerOnPosition).length() < 100:
 			completedCentering = true
+			position = centerOnPosition
 		return
 	
 	var velocity := Vector2.ZERO

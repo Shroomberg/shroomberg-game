@@ -6,9 +6,9 @@ signal on_loose
 @export var map_size: int = 10;
 @export var min_groth_distance: int = 3;
 
-@export var root_decay_rate: float = 0.3
-@export var root_groth_rate: float = 3
-@export var root_heal_rate: float = 0.5
+@export var root_decay_rate: float = 0.5
+@export var root_groth_rate: float = 2
+@export var root_heal_rate: float = 1
 
 @export var root_distance_penalty: float = 0.75
 @export var max_root_size: float = 10
@@ -18,9 +18,20 @@ signal on_loose
 var mushrooms: Dictionary[int, Array]
 var roots: Dictionary[int, float]
 func _ready():
-	for q in range(-map_size*2, map_size*2):
+	Engine.time_scale = 5
+	
+	for q in range(-map_size - 10, map_size + 10):
 		mushrooms[q] = []
 		roots[q] = 0
+		
+	roots[-map_size + 9] = max_root_size * root_distance_penalty
+	roots[-map_size + 10] = max_root_size
+	roots[-map_size + 11] = max_root_size* root_distance_penalty
+	
+	roots[map_size - 16] = max_root_size* root_distance_penalty
+	roots[map_size - 17] = max_root_size
+	roots[map_size - 18] = max_root_size* root_distance_penalty
+			
 	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
 
 func get_player_mushrooms(player: Mushroom.Player) -> Array[Mushroom]:

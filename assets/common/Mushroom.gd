@@ -12,8 +12,8 @@ enum UnitState {
 	Dead
 }
 
-@export var max_size: float = 4
-@export var grown_size: float = 2
+@export var max_size: float
+@export var grown_size: float
 @export var ungrown_decay_rate: float = 0.1
 @export var min_size: float = 2
 @export var borrow_distance: int = 1
