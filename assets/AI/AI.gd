@@ -18,7 +18,7 @@ func _on_timer_timeout() -> void:
 	for q in range(0, random):
 		move_tentacler(tentaclers.pick_random())
 	
-	if rng.randf_range(0, 1) < 0.05:
+	if rng.randf_range(0, 1) < 0.01:
 		move_mama(mama)
 		
 func move_spitter(unit: Mushroom):	

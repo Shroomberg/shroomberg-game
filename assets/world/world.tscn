@@ -18,13 +18,13 @@ tile_map_data = PackedByteArray("AAD5/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD7/wAAAQAAAAA
 [node name="Mushrooms" type="Node" parent="Terrain"]
 
 [node name="LeftMama" parent="Terrain/Mushrooms" instance=ExtResource("6_r2l5x")]
-position = Vector2(7018, 0)
+position = Vector2(6421, 0)
 player = 1
 state = 3
 size = 4.0
 
 [node name="RightMama" parent="Terrain/Mushrooms" instance=ExtResource("6_r2l5x")]
-position = Vector2(-8333, 0)
+position = Vector2(-7596, 0)
 state = 3
 size = 4.0
 
