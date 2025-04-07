@@ -134,6 +134,14 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_japrb")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_japrb")
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_hlspa")

@@ -7,6 +7,10 @@ class_name MamaMushroom extends Mushroom
 @export var attack_cooldown: float = 1
 
 const BULLET_SCENE = preload("res://assets/bullet/bullet.tscn")
+const spores = [
+	preload("res://assets/spitter/spitter.tscn"),
+ 	preload("res://assets/tentacler/tentacler.tscn")
+]
 
 func _ready():
 	super._ready()
@@ -116,14 +120,8 @@ func grow():
 	set_state(UnitState.Borrowed)
 
 func set_size(new_size: float):
-	size = new_size
-	power_factor = sqrt(size / max_size)
-	scale = Vector2(power_factor * direction, power_factor)
-	$HealthBar.value = size/max_size	
-	
-func die():
-	target = null
-	set_state(UnitState.Dead)
+	super.set_size(new_size)
+	$HealthBar.value = size/max_size
 
 func decide_new_action():	
 	match state:
@@ -148,6 +146,16 @@ func scan_for_target() -> Mushroom:
 	
 func get_bullet_hit_point():
 	return $BulletHitPoint.global_position
+
+var last_spore = 0
+func get_spore() -> Mushroom:
+	if current_spore_cooldown > 0:
+		return null
+	last_spore = (last_spore + 1) % 2;
+	var spore = spores[last_spore].instantiate()
+	spore.player = player
+	spore.size = 0
+	return spore		
 	
 func msg(msg: String):
 	print("%s:%s	%s	%s	%s " % [Time.get_ticks_msec(), get_instance_id(), Player.keys()[player], UnitState.keys()[state], msg])		

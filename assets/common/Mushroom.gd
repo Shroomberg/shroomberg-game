@@ -1,5 +1,7 @@
 class_name Mushroom extends CharacterBody2D
 
+signal on_death
+
 enum Player { Left, Right }
 enum UnitState {
 	NA,
@@ -13,13 +15,14 @@ enum UnitState {
 @export var max_size: float = 4
 @export var grown_size: float = 2
 @export var ungrown_decay_rate: float = 0.1
-@export var min_size: float = 1
+@export var min_size: float = 2
 
 @export var speed: float = 100.0
  
 @export var player: Player = Player.Left
 @export var state: UnitState
 @export var size: float
+@export var spore_cooldown: float = 5
 
 var power_factor: float 
 var target: Mushroom
@@ -28,12 +31,13 @@ var direction: int
 
 var world: World
 var cell_id: int
+var current_spore_cooldown = spore_cooldown
 				
 func _ready() -> void:
 	pass				
 				
 func is_dead() -> bool:
-	return state == UnitState.Dead
+	return state == UnitState.Dead or is_queued_for_deletion()
 	
 func is_borrowed() -> bool:
 	return state in [UnitState.Growing, UnitState.Borrowing, UnitState.Borrowed, UnitState.BorrowedAttacking, UnitState.BorrowedAttackCooldown]
@@ -54,20 +58,14 @@ func receive_heal(amount: float):
 
 func recieve_damage(amount: float):	
 	set_size(max(0, size - amount))
-	match state:
-		UnitState.Growing:
-			if size == 0:	
-				die()
-		_:
-			if size < min_size:		
-				die()	
+	if size < min_size:		
+		die()	
 					
 func _physics_process(delta: float):
+	current_spore_cooldown -= delta
 	match state:
 		UnitState.Moving:
-			move(delta)			
-		UnitState.Growing:
-			recieve_damage(delta * ungrown_decay_rate)
+			move(delta)
 
 func move(delta: float):	
 	position.x += direction * speed * delta * power_factor
@@ -75,10 +73,27 @@ func move(delta: float):
 		borrow()
 
 func die():
-	pass	
+	target = null
+	on_death.emit()
+	set_state(UnitState.Dead)
+	queue_free()
+	
+func set_size(new_size: float):
+	size = new_size
+	power_factor = size / max_size
+	scale = Vector2(power_factor * direction, power_factor)	
+
+func get_spore() -> Mushroom:
+	if current_spore_cooldown > 0:
+		return null
+	current_spore_cooldown = spore_cooldown
+	var spore = self.duplicate()
+	spore.size = 0
+	return spore	
+	
 func grow():
 	pass
 func borrow():
 	pass
-func set_size(new_size: float):
+func set_state(new_state: UnitState):
 	pass

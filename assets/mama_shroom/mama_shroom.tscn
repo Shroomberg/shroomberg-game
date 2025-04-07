@@ -12,7 +12,7 @@ script = ExtResource("1_one22")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_one22")
-animation = &"Unborrowing"
+animation = &"Attacking"
 offset = Vector2(0, -253)
 
 [node name="VisionArea" type="Area2D" parent="."]

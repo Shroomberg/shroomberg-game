@@ -1,6 +1,6 @@
 class_name Bullet extends Node2D
 
-@export var speed: float = 1000
+@export var speed: float = 2000
 @export var radius: float = 10
 @export var damage: float = 1
 
@@ -12,16 +12,16 @@ func _ready():
 	
 func _physics_process(delta: float):
 	if !target or is_queued_for_deletion():
+		queue_free()		
 		return		
 		
 	var direction = get_direction()
-			
-	var length = direction.length()
-	if length < radius:
+	var offset = delta * direction.normalized() * speed;	
+	
+	if direction.length() < offset.length():
 		on_hit()
-				
-	global_position += delta * direction.normalized() * speed;
-	pass
+	else:				
+		global_position += offset;
 
 func get_direction():
 	return target.get_bullet_hit_point() - global_position

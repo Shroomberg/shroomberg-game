@@ -12,7 +12,7 @@ script = ExtResource("1_uselb")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_uselb")
-animation = &"AttackCooldown"
+animation = &"Dead"
 offset = Vector2(0, -66)
 
 [node name="VisionArea" type="Area2D" parent="."]
