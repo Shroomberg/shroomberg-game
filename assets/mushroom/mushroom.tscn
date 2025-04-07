@@ -38,6 +38,7 @@ position = Vector2(0, -253)
 shape = SubResource("RectangleShape2D_qqeta")
 
 [node name="StateTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="BulletSpawnPoint" type="Marker2D" parent="."]
 position = Vector2(101, -191)

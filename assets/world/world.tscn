@@ -21,5 +21,23 @@ grown_size = 1.0
 state = 7
 size = 3.0
 
+[node name="Mushroom2" parent="." instance=ExtResource("2_l57e8")]
+position = Vector2(-492, 0)
+max_size = 3.0
+grown_size = 1.0
+state = 7
+size = 3.0
+
 [node name="Roots" parent="." instance=ExtResource("4_t3mbi")]
 z_index = 1
+
+[node name="RootGrothTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="RootDecayTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="RootGrothTimer" to="." method="_on_root_groth_timer_timeout"]
+[connection signal="timeout" from="RootDecayTimer" to="." method="_on_root_decay_timer_timeout"]
