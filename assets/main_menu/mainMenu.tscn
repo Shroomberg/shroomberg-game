@@ -47,6 +47,14 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Resume"
 
+[node name="MusicCheckBox" type="CheckBox" parent="ColorRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+button_pressed = true
+text = "Music
+"
+
 [node name="RestartButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -60,5 +68,6 @@ theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="toggled" from="ColorRect/CenterContainer/VBoxContainer/MusicCheckBox" to="." method="_on_music_check_box_toggled"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

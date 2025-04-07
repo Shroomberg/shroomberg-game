@@ -1,16 +1,13 @@
 class_name MainMenu extends Control
 
-
 @export var fade_in_duration := 0.3
 @export var fade_out_duration := 0.2
 
 @onready var center_cont := $ColorRect/CenterContainer as CenterContainer
 @onready var resume_button := center_cont.get_node(^"VBoxContainer/ResumeButton") as Button
 
-
 func _ready() -> void:
 	hide()
-
 
 func close() -> void:
 	var tween := create_tween()
@@ -29,8 +26,8 @@ func close() -> void:
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(hide)
 
-
 func open() -> void:
+
 	show()
 	resume_button.grab_focus()
 
@@ -50,30 +47,20 @@ func open() -> void:
 		fade_out_duration
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-
-
 func _on_resume_button_pressed() -> void:
 	close()
-
-
-func _on_singleplayer_button_pressed() -> void:
-	if visible:
-		get_tree().paused = false
-		get_tree().change_scene_to_file("res://game_singleplayer.tscn")
-
-
-func _on_splitscreen_button_pressed() -> void:
-	if visible:
-		get_tree().paused = false
-		get_tree().change_scene_to_file("res://game_splitscreen.tscn")
-
 
 func _on_quit_button_pressed() -> void:
 	if visible:
 		get_tree().quit()
 
-
 func _on_restart_button_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-	
+
+func _on_music_check_box_toggled(toggled_on: bool) -> void:
+	var player = get_tree().current_scene.find_child("Music") as AudioStreamPlayer2D
+	if toggled_on:
+		player.play()
+	else:
+		player.stop()
