@@ -64,3 +64,11 @@ func _on_music_check_box_toggled(toggled_on: bool) -> void:
 		player.play()
 	else:
 		player.stop()
+
+func _unhandled_input(event: InputEvent) -> void:
+	var tree := get_tree()
+	if event.is_action_pressed(&"toggle_pause"):
+		if tree.paused:
+			tree.paused = not tree.paused
+			close()
+			get_tree().root.set_input_as_handled()
