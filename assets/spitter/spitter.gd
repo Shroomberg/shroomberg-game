@@ -14,8 +14,8 @@ func _ready():
 	grown_size = 4
 	speed = 100
 	attack_cooldown = 3
-	action_range = 30
-	damage = 3
+	action_range = 25
+	damage = 2.5
 	
 	target = null
 	borrow_requested = false
