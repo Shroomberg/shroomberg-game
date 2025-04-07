@@ -7,20 +7,17 @@ class_name World extends Node
 @export var root_groth_rate: float = 3
 @export var root_heal_rate: float = 0.5
 
-@export var root_distance_penalty: float = 0.8
+@export var root_distance_penalty: float = 0.75
 @export var max_root_size: float = 10
 @export var min_root_size: float = 3
 @export var root_state_count: int = 5
 
 var mushrooms: Dictionary[int, Array]
 var roots: Dictionary[int, float]
-var root_owners: Dictionary[int, Mushroom]
-var allowed_root_size: Dictionary[int, float]
 func _ready():
 	for q in range(-map_size*2, map_size*2):
 		mushrooms[q] = []
 		roots[q] = 0
-		root_owners[q] = null
 	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
 
 func get_root_data(position: int) -> int:
@@ -63,49 +60,60 @@ func grow_mushroom(position: int, delta: float):
 			mushroom.receive_heal(delta * root_heal_rate)
 		else:			
 			mushroom.recieve_damage(delta * root_decay_rate)
-	elif is_cell_free_to_grow(position):		
-		if roots[position]:
-			var spore = root_owners[position].get_spore()
-			mushrooms[position].push_back(spore)
-			spore.position.x = $Terrain.map_to_local(Vector2i(position, 0)).x
-			$Terrain/Mushrooms.add_child(spore)
-		
-func rebuild_root_owners():
-	allowed_root_size
+	elif is_cell_free_to_grow(position):
+		var owner = get_root_owner(position)		
+		if roots[position] and owner:
+			var spore = owner.get_spore()
+			if spore:				
+				mushrooms[position].push_back(spore)
+				spore.position.x = $Terrain.map_to_local(Vector2i(position, 0)).x
+				$Terrain/Mushrooms.add_child(spore)
+
+func get_root_owner(position: int) -> Mushroom:
+	var can_left = true
+	var can_right = true
+	for q in range(0, map_size):
+		can_left = can_left and roots[position - q] > min_root_size
+		can_right = can_right and roots[position + q] > min_root_size
+		if !can_left and !can_right:
+			return null
+				
+		var left = get_borrowed_mushroom(position - q) if can_left else null
+		var right = get_borrowed_mushroom(position + q) if can_right else null
+		if left and !right:
+			return left;
+		if !left and right:
+			return right;
+		if left and right:
+			return right if left.player == right.player else null;			
+	return null	
+	
+func get_allowed_size():
+	var allowed_root_size: Dictionary[int, float]
 	for cell_id in range(-map_size, map_size): 
 		var mushroom = get_borrowed_mushroom(cell_id)
 		if mushroom && mushroom.is_grown():
 			allowed_root_size[cell_id] = max_root_size
-			root_owners[cell_id] = mushroom
 		else:
-			allowed_root_size[cell_id] = -1
-			root_owners[cell_id] = null	
-			
-	for cell_id in range(-map_size, map_size): 
-		if allowed_root_size[cell_id] < 0:
-			var left = roots.get(cell_id - 1, 0)
-			var right = roots.get(cell_id + 1, 0)
-			allowed_root_size[cell_id] = max(left, right) * root_distance_penalty
+			allowed_root_size[cell_id] = max(roots.get(cell_id - 1, 0), roots.get(cell_id + 1, 0))  * root_distance_penalty
 			if allowed_root_size[cell_id] < min_root_size:
-				root_owners[cell_id] = null
 				allowed_root_size[cell_id] = 0
-			elif left > right:
-				root_owners[cell_id] = root_owners[cell_id - 1]
-			else:
-				root_owners[cell_id] = root_owners[cell_id + 1]	
+	return allowed_root_size
 
 func natual_groth(delta: float):
-	for cell_id in range(-map_size, map_size): 		
-		if roots[cell_id] == allowed_root_size[cell_id]:
-			grow_mushroom(cell_id, delta)
-		elif roots[cell_id] > allowed_root_size[cell_id]:
-			roots[cell_id] = max(allowed_root_size[cell_id], roots[cell_id] - delta * root_decay_rate)	
-		else:
-			roots[cell_id] = min(allowed_root_size[cell_id], roots[cell_id] + delta * root_groth_rate)
+	var allowed_root_size = get_allowed_size()
+	for distance in range(0, map_size): 	
+		for direction in [-1, 1] if distance > 0 else [1]:
+			var cell_id = distance * direction	
+			if roots[cell_id] == allowed_root_size[cell_id]:
+				grow_mushroom(cell_id, delta)
+			elif roots[cell_id] > allowed_root_size[cell_id]:
+				roots[cell_id] = max(allowed_root_size[cell_id], roots[cell_id] - delta * root_decay_rate)	
+			else:
+				roots[cell_id] = min(allowed_root_size[cell_id], roots[cell_id] + delta * root_groth_rate)
 
 func _physics_process(delta: float):
 	rebuild_mushrooms()
-	rebuild_root_owners()
 	natual_groth(delta)
 	apply_root_tiles()
 	

@@ -149,6 +149,8 @@ func get_bullet_hit_point():
 
 var last_spore = 0
 func get_spore() -> Mushroom:
+	if current_spore_cooldown > 0:
+		return null
 	last_spore = (last_spore + 1) % 2;
 	var spore = spores[last_spore].instantiate()
 	spore.player = player

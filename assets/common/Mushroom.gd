@@ -1,5 +1,7 @@
 class_name Mushroom extends CharacterBody2D
 
+signal on_death
+
 enum Player { Left, Right }
 enum UnitState {
 	NA,
@@ -20,6 +22,7 @@ enum UnitState {
 @export var player: Player = Player.Left
 @export var state: UnitState
 @export var size: float
+@export var spore_cooldown: float = 5
 
 var power_factor: float 
 var target: Mushroom
@@ -28,6 +31,7 @@ var direction: int
 
 var world: World
 var cell_id: int
+var current_spore_cooldown = spore_cooldown
 				
 func _ready() -> void:
 	pass				
@@ -58,6 +62,7 @@ func recieve_damage(amount: float):
 		die()	
 					
 func _physics_process(delta: float):
+	current_spore_cooldown -= delta
 	match state:
 		UnitState.Moving:
 			move(delta)
@@ -69,6 +74,7 @@ func move(delta: float):
 
 func die():
 	target = null
+	on_death.emit()
 	set_state(UnitState.Dead)
 	queue_free()
 	
@@ -78,6 +84,9 @@ func set_size(new_size: float):
 	scale = Vector2(power_factor * direction, power_factor)	
 
 func get_spore() -> Mushroom:
+	if current_spore_cooldown > 0:
+		return null
+	current_spore_cooldown = spore_cooldown
 	var spore = self.duplicate()
 	spore.size = 0
 	return spore	
