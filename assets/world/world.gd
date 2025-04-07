@@ -22,6 +22,13 @@ func _ready():
 		mushrooms[q] = []
 		roots[q] = 0
 	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
+
+func get_player_mushrooms(player: Mushroom.Player) -> Array[Mushroom]:
+	var res:Array[Mushroom] = []
+	for q in $Terrain/Mushrooms.get_children():
+		if q is Mushroom and q.player == player:
+			res.push_back(q)
+	return res
 	
 func get_cell_position(postion: int) -> float:
 	return $Terrain.map_to_local(Vector2i(postion, 0)).x
