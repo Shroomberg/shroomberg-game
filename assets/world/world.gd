@@ -121,9 +121,8 @@ func msg(msg: String):
 	print("%s: %s" % [Time.get_ticks_msec(), msg])		
 
 
-func _on_mama_mushroom_on_death() -> void:
-	on_win.emit()
-
-
-func _on_mama_mushroom_2_on_death() -> void:
+func _on_left_mama_on_death() -> void:
 	on_loose.emit()
+
+func _on_right_mama_on_death() -> void:
+	on_win.emit()
