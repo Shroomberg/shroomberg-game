@@ -4,7 +4,10 @@ class_name MainMenu extends Control
 @export var fade_out_duration := 0.2
 
 @onready var center_cont := $ColorRect/CenterContainer as CenterContainer
-@onready var resume_button := center_cont.get_node(^"VBoxContainer/ResumeButton") as Button
+#@onready var resume_button := center_cont.get_node(^"VBoxContainer/ResumeButton") as Button
+@onready var resume_button := center_cont.get_node(^"VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton") as Button
+#@onready var resume_button := $ResumeButton as Button
+
 
 func _ready() -> void:
 	hide()
@@ -29,7 +32,7 @@ func close() -> void:
 func open() -> void:
 
 	show()
-	resume_button.grab_focus()
+	#resume_button.grab_focus()
 
 	modulate.a = 0.0
 	center_cont.anchor_bottom = 0.5
@@ -69,6 +72,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	var tree := get_tree()
 	if event.is_action_pressed(&"toggle_pause"):
 		if tree.paused:
-			tree.paused = not tree.paused
+			#tree.paused = not tree.paused
 			close()
 			get_tree().root.set_input_as_handled()
