@@ -1,21 +1,10 @@
 class_name Tentacler extends Mushroom
-
-signal on_borrow
-signal on_unborrow
 	
-@export var max_size: float = 4
-@export var grown_size: float = 2
-@export var speed: float = 100.0
 @export var damage: float = 1.0
 @export var action_range: float = 3
 @export var borrow_duration: float = 1
 @export var attack_duration: float = 1
 @export var attack_cooldown: float = 1
-
-var power_factor: float 
-var target: Mushroom
-var borrow_requested: bool
-var direction: int
 
 func _ready():
 	super._ready()
@@ -51,10 +40,8 @@ func _on_state_timer_timeout():
 	msg("timer")
 	match state:
 		UnitState.Unborrowing:
-			on_unborrow.emit(self)
 			set_state(UnitState.Moving)
 		UnitState.Borrowing:
-			on_borrow.emit(self)
 			set_state(UnitState.Borrowed)
 		UnitState.Attacking, UnitState.BorrowedAttacking:
 			do_target_attack()
@@ -77,13 +64,6 @@ func _on_vision_area_body_exited(body: Node2D) -> void:
 func _on_vision_area_body_entered(body: Node2D) -> void:
 	if body != self:		
 		decide_new_action()
-	
-func _physics_process(delta: float):
-	match state:
-		UnitState.Moving:
-			move(delta)			
-		UnitState.Growing, UnitState.Borrowed:
-			receive_heal(delta*0.3)
 
 func set_state(new_state: UnitState):	
 	if new_state == state:
@@ -132,11 +112,6 @@ func do_target_attack():
 	if !target:
 		return
 	target.recieve_damage(damage * power_factor)	
-
-func move(delta: float):	
-	position.x += direction * speed * delta * power_factor
-	if borrow_requested and can_borrow_here():		
-		borrow()
 	
 func grow():
 	set_state(UnitState.Borrowed)
@@ -146,25 +121,6 @@ func set_size(new_size: float):
 	power_factor = sqrt(size / max_size)
 	scale = Vector2(power_factor * direction, power_factor)
 	$HealthBar.value = size/max_size
-	
-func receive_heal(amount: float):
-	set_size(min(max_size, size + amount))
-	match state:
-		UnitState.Growing:
-			if size >= grown_size:
-				grow()
-
-func recieve_damage(amount: float):	
-	set_size(max(0, size - amount))
-	#if size == 0:	
-		#die()
-	match state:
-		UnitState.Growing:
-			if size == 0:	
-				die()
-		_:
-			if size < grown_size:	
-				set_state(UnitState.Growing)
 
 func die():
 	target = null
@@ -192,10 +148,7 @@ func scan_for_target() -> Mushroom:
 	return null
 	
 func get_bullet_hit_point():
-	return $BulletHitPoint.global_position
-	
-func is_borrowed():
-	return state == UnitState.Borrowed or state == UnitState.BorrowedAttacking or state == UnitState.BorrowedAttackCooldown
+	return $BulletHitPoint.global_position	
 	
 func msg(msg: String):
 	print("%s:%s	%s	%s	%s " % [Time.get_ticks_msec(), get_instance_id(), Player.keys()[player], UnitState.keys()[state], msg])		
