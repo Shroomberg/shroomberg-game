@@ -140,7 +140,7 @@ func msg(msg: String):
 
 
 func _on_left_mama_on_death() -> void:
-	on_loose.emit()
+	on_win.emit()
 
 func _on_right_mama_on_death() -> void:
-	on_win.emit()
+	on_loose.emit()
