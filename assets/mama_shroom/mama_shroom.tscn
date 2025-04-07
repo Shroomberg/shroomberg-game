@@ -1,6 +1,5 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqqbt3q78x2s1"]
 
-
 [ext_resource type="Script" uid="uid://ksf2w4xmrlkr" path="res://assets/mama_shroom/mama_shroom.gd" id="1_one22"]
 [ext_resource type="SpriteFrames" uid="uid://c78bh1q0etv08" path="res://assets/mama_shroom/mama_schroom.tres" id="2_one22"]
 
