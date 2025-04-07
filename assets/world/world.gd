@@ -19,9 +19,6 @@ func _ready():
 		mushrooms[q] = []
 		roots[q] = 0
 	$Camera2D.slideToPosition($CameraStartPosition.global_position, 1.5)
-
-func get_root_data(position: int) -> int:
-	return $Roots.get_cell_source_id(Vector2i(position, 0))
 	
 func get_cell_position(postion: int) -> float:
 	return $Terrain.map_to_local(Vector2i(postion, 0)).x
@@ -51,7 +48,7 @@ func rebuild_mushrooms():
 func apply_root_tiles():
 	for cell_id in range(-map_size, map_size):
 		var tile_id = round(roots[cell_id] * root_state_count / max_root_size) - 2;
-		$Roots.set_cell(Vector2i(cell_id, 0), tile_id, Vector2i.ZERO, 0)	
+		$Terrain/Roots.set_cell(Vector2i(cell_id, 0), tile_id, Vector2i.ZERO, 0)	
 	
 func grow_mushroom(position: int, delta: float):
 	var mushroom = get_borrowed_mushroom(position)

@@ -40,12 +40,12 @@ max_size = 20.0
 state = 3
 size = 20.0
 
+[node name="Roots" parent="Terrain" instance=ExtResource("4_t3mbi")]
+z_index = 1
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-772, -380)
 script = ExtResource("3_88ng3")
-
-[node name="Roots" parent="." instance=ExtResource("4_t3mbi")]
-z_index = 1
 
 [node name="CameraStartPosition" type="Marker2D" parent="."]
 position = Vector2(-772, -380)
