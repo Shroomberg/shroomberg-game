@@ -1,10 +1,76 @@
-[gd_scene load_steps=4 format=3 uid="uid://be2ometqfylui"]
+[gd_scene load_steps=8 format=3 uid="uid://be2ometqfylui"]
 
 [ext_resource type="Script" uid="uid://cdkl7mlitjsih" path="res://assets/spitter/spitter.gd" id="1_egaq4"]
 [ext_resource type="SpriteFrames" uid="uid://m8gn8xncnu26" path="res://assets/spitter/spitter.tres" id="2_egaq4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqeta"]
 size = Vector2(60.0625, 107.758)
+
+[sub_resource type="Animation" id="Animation_egaq4"]
+resource_name = "click_unborrowed"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(3.4822, 3.4822, 3.4822),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -60), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_41bgq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0k3n8"]
+resource_name = "click_borrowed"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(3.86375, 3.86375, 3.86375),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.4), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t368b"]
+_data = {
+&"RESET": SubResource("Animation_41bgq"),
+&"click_borrowed": SubResource("Animation_0k3n8"),
+&"click_unborrowed": SubResource("Animation_egaq4")
+}
 
 [node name="Spitter" type="CharacterBody2D"]
 input_pickable = true
@@ -53,6 +119,11 @@ position = Vector2(27, -54)
 
 [node name="BulletHitPoint" type="Marker2D" parent="."]
 position = Vector2(0, -54)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t368b")
+}
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
