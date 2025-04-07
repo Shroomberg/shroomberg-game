@@ -2,12 +2,11 @@ class_name World extends Node
 
 @export var map_size: int = 10;
 @export var min_groth_distance: int = 3;
-@export var root_decay_rate: float = 1
+@export var root_decay_rate: float = 0.3
 @export var root_groth_rate: float = 3
-@export var root_distance_penalty: float = 0.75
+@export var root_distance_penalty: float = 0.8
 @export var max_root_size: float = 10
-@export var grown_root_size: float = 5
-@export var root_state_count: int = 4
+@export var root_state_count: int = 5
 
 var mushrooms: Dictionary[int, Array]
 var roots: Dictionary[int, float]
@@ -22,14 +21,14 @@ func _ready():
 func get_root_data(position: int) -> int:
 	return $Roots.get_cell_source_id(Vector2i(position, 0))
 	
-func is_grown_root(position: int):
-	return roots[position] > grown_root_size
-
 func get_cell_position(postion: int) -> float:
 	return $Terrain.map_to_local(Vector2i(postion, 0)).x
 
 func get_borrowed_mushroom(position: int) -> Mushroom:
-	return mushrooms[position].filter(func(q: Mushroom): return q.is_borrowed()).front()
+	for q in mushrooms[position]:
+		if q.is_borrowed():
+			return q
+	return null
 
 func is_cell_free_to_grow(position: int) -> bool:
 	for d in range(0, min_groth_distance):
@@ -47,7 +46,7 @@ func rebuild_mushrooms():
 
 func apply_root_tiles():
 	for cell_id in range(-map_size, map_size):
-		var tile_id = round(roots[cell_id] * root_state_count / max_root_size) - 1;
+		var tile_id = round(roots[cell_id] * root_state_count / max_root_size) - 2;
 		$Roots.set_cell(Vector2i(cell_id, 0), tile_id, Vector2i.ZERO, 0)	
 		
 func natual_groth(delta: float):
