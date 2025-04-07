@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://da4noqsij73it" path="res://assets/gui/theme.tres" id="1_ejng8"]
 [ext_resource type="Script" uid="uid://bf0frcyxmn4cr" path="res://assets/main_menu/mainMenu.gd" id="1_noyil"]
 [ext_resource type="Texture2D" uid="uid://dbteuuxe6ltkp" path="res://assets/main_menu/title.png" id="3_ohfln"]
-[ext_resource type="Texture2D" uid="uid://csysvvi3pjbsq" path="res://assets/main_menu/guide1.png" id="4_3u8il"]
-[ext_resource type="Texture2D" uid="uid://uvnb5l650i4e" path="res://assets/main_menu/guide2.png" id="5_7tyfk"]
+[ext_resource type="Texture2D" uid="uid://dh88xf1l83dsr" path="res://assets/main_menu/controls_tooltip.png" id="4_3u8il"]
+[ext_resource type="Texture2D" uid="uid://baxcf3i43mbk7" path="res://assets/main_menu/tooltip2.png" id="5_7tyfk"]
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -48,7 +48,11 @@ layout_mode = 2
 
 [node name="TextureRectLeft" type="TextureRect" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("4_3u8il")
+texture = ExtResource("5_7tyfk")
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -84,9 +88,13 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
 [node name="TextureRectRight" type="TextureRect" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("5_7tyfk")
+texture = ExtResource("4_3u8il")
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="toggled" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/MusicCheckBox" to="." method="_on_music_check_box_toggled"]
