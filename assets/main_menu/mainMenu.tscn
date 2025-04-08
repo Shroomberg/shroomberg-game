@@ -49,7 +49,7 @@ texture = ExtResource("3_ohfln")
 stretch_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
@@ -69,7 +69,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 46
 text = "Menu"
 horizontal_alignment = 1
 
@@ -79,21 +79,20 @@ layout_mode = 2
 
 [node name="NewGameButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 46
 text = "New game
 "
 
 [node name="ResumeButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 46
 text = "Resume"
 
 [node name="5xSpeedCheckBox" type="CheckBox" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 46
 text = "5x  speed
 "
 alignment = 1
@@ -101,22 +100,21 @@ alignment = 1
 [node name="MusicCheckBox" type="CheckBox" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 46
 button_pressed = true
 text = "Music"
 alignment = 1
 
 [node name="RestartButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 46
 text = "Restart"
 
 [node name="QuitButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 46
 text = "Quit"
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
