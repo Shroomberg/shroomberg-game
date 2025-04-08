@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://c78bh1q0etv08"]
+[gd_resource type="SpriteFrames" load_steps=20 format=3 uid="uid://c78bh1q0etv08"]
 
 [ext_resource type="Texture2D" uid="uid://bwamwp28h4wtv" path="res://assets/mama_shroom/sprite/idle/main_idle0000.png" id="1_qqrdp"]
 [ext_resource type="Texture2D" uid="uid://dx83tejw1fn6b" path="res://assets/mama_shroom/sprite/idle/main_idle0001.png" id="2_0ftpr"]
@@ -11,10 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://ctppu2lh70ryp" path="res://assets/mama_shroom/sprite/attack/main_attack0004.png" id="9_cv8vr"]
 [ext_resource type="Texture2D" uid="uid://cdasjndwwdfqd" path="res://assets/mama_shroom/sprite/attack/main_attack0005.png" id="10_tpbji"]
 [ext_resource type="Texture2D" uid="uid://okyxvtgn7f0b" path="res://assets/mama_shroom/sprite/attack/main_attack0006.png" id="11_ineti"]
+[ext_resource type="Texture2D" uid="uid://ciwefot14cj3d" path="res://assets/mama_shroom/sprite/burrowing/main_idle0000.png" id="12_2gj6c"]
 [ext_resource type="Texture2D" uid="uid://bdhaj7gw2xk7a" path="res://assets/mama_shroom/sprite/walking/main_walking0000.png" id="12_sv2qe"]
 [ext_resource type="Texture2D" uid="uid://ddgcq7p4hhhyu" path="res://assets/mama_shroom/sprite/walking/main_walking0001.png" id="13_oj5f5"]
+[ext_resource type="Texture2D" uid="uid://bn6d76x7330ou" path="res://assets/mama_shroom/sprite/burrowing/main_idle0001.png" id="13_rute1"]
 [ext_resource type="Texture2D" uid="uid://dbrlqcpgxtein" path="res://assets/mama_shroom/sprite/walking/main_walking0002.png" id="14_01vnj"]
+[ext_resource type="Texture2D" uid="uid://7ljj312t0cv5" path="res://assets/mama_shroom/sprite/burrowing/main_idle0002.png" id="14_lsnt2"]
 [ext_resource type="Texture2D" uid="uid://c58ch5me0cpx8" path="res://assets/mama_shroom/sprite/walking/main_walking0003.png" id="15_ck0wq"]
+[ext_resource type="Texture2D" uid="uid://3btiiwfslg7" path="res://assets/mama_shroom/sprite/burrowing/main_idle0003.png" id="15_r2a2b"]
 
 [resource]
 animations = [{
@@ -123,16 +127,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_qqrdp")
+"texture": ExtResource("12_2gj6c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_0ftpr")
+"texture": ExtResource("13_rute1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_pjhhq")
+"texture": ExtResource("14_lsnt2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_5ep4t")
+"texture": ExtResource("15_r2a2b")
 }],
 "loop": true,
 "name": &"Borrowing",
@@ -182,16 +186,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_qqrdp")
+"texture": ExtResource("12_2gj6c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_0ftpr")
+"texture": ExtResource("13_rute1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_pjhhq")
+"texture": ExtResource("14_lsnt2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_5ep4t")
+"texture": ExtResource("15_r2a2b")
 }],
 "loop": true,
 "name": &"Unborrowing",

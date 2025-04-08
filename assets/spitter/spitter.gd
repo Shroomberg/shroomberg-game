@@ -2,7 +2,7 @@ class_name Spitter extends Mushroom
 
 @export var damage: float = 1.0
 @export var action_range: float = 3
-@export var borrow_duration: float = 0.1
+@export var borrow_duration: float = 2
 @export var attack_duration: float = 1
 @export var attack_cooldown: float = 1
 

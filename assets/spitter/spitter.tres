@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://m8gn8xncnu26"]
+[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://m8gn8xncnu26"]
 
 [ext_resource type="Texture2D" uid="uid://d0eltch75isdx" path="res://assets/spitter/sprite/idle/mushroom_range_idle0000.png" id="1_japrb"]
 [ext_resource type="Texture2D" uid="uid://c00h4p3mk3iix" path="res://assets/spitter/sprite/idle/mushroom_range_idle0001.png" id="2_hlspa"]
@@ -10,9 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://ca50tdsb70gm5" path="res://assets/spitter/sprite/attack/mushroom_range_attack0003.png" id="8_df103"]
 [ext_resource type="Texture2D" uid="uid://d0qk3uo6qem76" path="res://assets/spitter/sprite/attack/mushroom_range_attack0004.png" id="9_r7kpl"]
 [ext_resource type="Texture2D" uid="uid://rfvaevxk1wq2" path="res://assets/spitter/sprite/attack/mushroom_range_attack0005.png" id="10_n87rk"]
+[ext_resource type="Texture2D" uid="uid://dwbane1afa5pl" path="res://assets/spitter/sprite/burrowing/mushroom_range_idle0000.png" id="11_dnpab"]
 [ext_resource type="Texture2D" uid="uid://g86elv5sfxf6" path="res://assets/spitter/sprite/walking/mushroom_range_walking0000.png" id="11_ubylq"]
 [ext_resource type="Texture2D" uid="uid://h4eamv6js0os" path="res://assets/spitter/sprite/walking/mushroom_range_walking0001.png" id="12_oud56"]
+[ext_resource type="Texture2D" uid="uid://c2hepulfaah8b" path="res://assets/spitter/sprite/burrowing/mushroom_range_idle0001.png" id="12_s07yy"]
 [ext_resource type="Texture2D" uid="uid://vi3a5flqh2bi" path="res://assets/spitter/sprite/walking/mushroom_range_walking0002.png" id="13_0ax18"]
+[ext_resource type="Texture2D" uid="uid://bsei4c27slovv" path="res://assets/spitter/sprite/burrowing/mushroom_range_idle0002.png" id="13_6r0gg"]
+[ext_resource type="Texture2D" uid="uid://cv4wp003pikjo" path="res://assets/spitter/sprite/burrowing/mushroom_range_idle0003.png" id="14_df103"]
 [ext_resource type="Texture2D" uid="uid://dem87dresmqj5" path="res://assets/spitter/sprite/walking/mushroom_range_walking0003.png" id="14_rmhyo"]
 
 [resource]
@@ -116,16 +120,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_japrb")
+"texture": ExtResource("11_dnpab")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_hlspa")
+"texture": ExtResource("12_s07yy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_0g4bw")
+"texture": ExtResource("13_6r0gg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_guww5")
+"texture": ExtResource("14_df103")
 }],
 "loop": true,
 "name": &"Borrowing",
@@ -175,16 +179,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_japrb")
+"texture": ExtResource("11_dnpab")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_hlspa")
+"texture": ExtResource("12_s07yy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_0g4bw")
+"texture": ExtResource("13_6r0gg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_guww5")
+"texture": ExtResource("14_df103")
 }],
 "loop": true,
 "name": &"Unborrowing",

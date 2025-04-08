@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://de2e6rmlix4xn"]
+[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://de2e6rmlix4xn"]
 
 [ext_resource type="Texture2D" uid="uid://d0jf01u6htj71" path="res://assets/tentacler/sprite/idle/mushroom_melee_idle0000.png" id="1_nwfa7"]
 [ext_resource type="Texture2D" uid="uid://brnwa175fyrks" path="res://assets/tentacler/sprite/idle/mushroom_melee_idle0001.png" id="2_6c3cq"]
@@ -8,9 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bnj51p2vxi3us" path="res://assets/tentacler/sprite/attack/mushroom_melee_attack0001.png" id="6_kcfru"]
 [ext_resource type="Texture2D" uid="uid://b3n74eek53ox4" path="res://assets/tentacler/sprite/attack/mushroom_melee_attack0002.png" id="7_xnu81"]
 [ext_resource type="Texture2D" uid="uid://cx8ppagkaqagm" path="res://assets/tentacler/sprite/attack/mushroom_melee_attack0003.png" id="8_bhlgy"]
+[ext_resource type="Texture2D" uid="uid://fimd2s7e5veg" path="res://assets/tentacler/sprite/burrowing/mushroom_melee_idle0000.png" id="9_0tdhs"]
 [ext_resource type="Texture2D" uid="uid://b4naxguumjfkf" path="res://assets/tentacler/sprite/walking/mushroom_melee_walking0000.png" id="9_q5ju7"]
 [ext_resource type="Texture2D" uid="uid://b8ycvaequik4n" path="res://assets/tentacler/sprite/walking/mushroom_melee_walking0001.png" id="10_88w6o"]
+[ext_resource type="Texture2D" uid="uid://b2naadcijfv83" path="res://assets/tentacler/sprite/burrowing/mushroom_melee_idle0001.png" id="10_kcfru"]
 [ext_resource type="Texture2D" uid="uid://c7maag4llky50" path="res://assets/tentacler/sprite/walking/mushroom_melee_walking0002.png" id="11_rxdf1"]
+[ext_resource type="Texture2D" uid="uid://e7c26502spnd" path="res://assets/tentacler/sprite/burrowing/mushroom_melee_idle0002.png" id="11_xnu81"]
+[ext_resource type="Texture2D" uid="uid://bml0givifty7s" path="res://assets/tentacler/sprite/burrowing/mushroom_melee_idle0003.png" id="12_bhlgy"]
 [ext_resource type="Texture2D" uid="uid://bn4b3k0qd874u" path="res://assets/tentacler/sprite/walking/mushroom_melee_walking0003.png" id="12_g1pr6"]
 [ext_resource type="Texture2D" uid="uid://cdl5vt64shh0q" path="res://assets/tentacler/sprite/walking/mushroom_melee_walking0004.png" id="13_r0xyc"]
 [ext_resource type="Texture2D" uid="uid://dtv16a4a6nm3v" path="res://assets/tentacler/sprite/walking/mushroom_melee_walking0005.png" id="14_yuy0e"]
@@ -104,16 +108,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_nwfa7")
+"texture": ExtResource("9_0tdhs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_6c3cq")
+"texture": ExtResource("10_kcfru")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_dq0oy")
+"texture": ExtResource("11_xnu81")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_pdya4")
+"texture": ExtResource("12_bhlgy")
 }],
 "loop": true,
 "name": &"Borrowing",
@@ -169,16 +173,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_nwfa7")
+"texture": ExtResource("9_0tdhs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_6c3cq")
+"texture": ExtResource("10_kcfru")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_dq0oy")
+"texture": ExtResource("11_xnu81")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_pdya4")
+"texture": ExtResource("12_bhlgy")
 }],
 "loop": true,
 "name": &"Unborrowing",
