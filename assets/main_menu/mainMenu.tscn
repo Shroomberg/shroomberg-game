@@ -43,6 +43,10 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("3_ohfln")
 
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -51,12 +55,12 @@ layout_mode = 2
 texture = ExtResource("5_7tyfk")
 
 [node name="MarginContainer2" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-alignment = 1
 
 [node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -86,17 +90,17 @@ text = "Resume"
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 32
-text = "5x game speed
+text = "5x  speed
 "
+alignment = 1
 
 [node name="MusicCheckBox" type="CheckBox" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 focus_mode = 0
 theme_override_font_sizes/font_size = 32
 button_pressed = true
-text = "Music
-"
+text = "Music"
+alignment = 1
 
 [node name="RestartButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 visible = false
@@ -108,18 +112,21 @@ text = "Restart"
 
 [node name="QuitButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 focus_mode = 0
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="TextureRectRight" type="TextureRect" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_3u8il")
+
+[node name="MarginContainer3" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
